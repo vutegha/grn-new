@@ -288,6 +288,34 @@
                         @endif
                         
                         <div>
+                            <dt class="text-sm font-medium text-gray-500 mb-2">Profil public</dt>
+                            <dd class="text-sm">
+                                <div class="flex items-center gap-2">
+                                    <input type="text" 
+                                           id="publicProfileUrl" 
+                                           value="{{ route('site.auteur.show', $auteur->getSlug()) }}" 
+                                           readonly 
+                                           class="flex-1 px-3 py-2 text-xs border border-gray-300 rounded-lg bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-iri-primary/50">
+                                    <button onclick="copyProfileLink(event)" 
+                                            class="inline-flex items-center px-3 py-2 bg-iri-primary text-white text-xs font-medium rounded-lg hover:bg-iri-secondary transition-colors duration-200 flex-shrink-0"
+                                            title="Copier le lien">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <a href="{{ route('site.auteur.show', $auteur->getSlug()) }}" 
+                                   target="_blank"
+                                   class="inline-flex items-center mt-2 text-xs text-iri-primary hover:text-iri-secondary">
+                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                    </svg>
+                                    Ouvrir dans un nouvel onglet
+                                </a>
+                            </dd>
+                        </div>
+                        
+                        <div>
                             <dt class="text-sm font-medium text-gray-500">Date de création</dt>
                             <dd class="text-sm text-gray-900">{{ $auteur->created_at->format('d/m/Y à H:i') }}</dd>
                         </div>
@@ -376,6 +404,57 @@
         </div>
     </div>
 </div>
+
+<script>
+function copyProfileLink(event) {
+    const input = document.getElementById('publicProfileUrl');
+    const button = event.currentTarget;
+    const originalHTML = button.innerHTML;
+    
+    input.select();
+    input.setSelectionRange(0, 99999); // Pour mobile
+    
+    // Fonction pour afficher le succès
+    function showSuccess() {
+        button.innerHTML = `
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+        `;
+        button.classList.remove('bg-iri-primary', 'hover:bg-iri-secondary');
+        button.classList.add('bg-green-600', 'hover:bg-green-700');
+        
+        setTimeout(() => {
+            button.innerHTML = originalHTML;
+            button.classList.remove('bg-green-600', 'hover:bg-green-700');
+            button.classList.add('bg-iri-primary', 'hover:bg-iri-secondary');
+        }, 2000);
+    }
+    
+    // Essayer avec l'API Clipboard moderne
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(input.value).then(() => {
+            showSuccess();
+        }).catch(err => {
+            // Fallback vers la méthode classique
+            try {
+                document.execCommand('copy');
+                showSuccess();
+            } catch (e) {
+                alert('Impossible de copier le lien. Veuillez le copier manuellement.');
+            }
+        });
+    } else {
+        // Méthode classique pour les navigateurs plus anciens
+        try {
+            document.execCommand('copy');
+            showSuccess();
+        } catch (err) {
+            alert('Impossible de copier le lien. Veuillez le copier manuellement.');
+        }
+    }
+}
+</script>
 
 @push('scripts')
 <script>

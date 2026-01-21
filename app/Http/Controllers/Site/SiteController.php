@@ -1456,14 +1456,14 @@ public function auteurShow($slug)
     }
 
     $auteur = Auteur::with(['publications' => function($query) {
-        $query->where('statut', 'publie')
+        $query->where('is_published', true)
               ->latest()
               ->take(10);
     }])->findOrFail($id);
 
     // Compter le nombre total de publications de l'auteur
     $totalPublications = $auteur->publications()
-                                ->where('statut', 'publie')
+                                ->where('is_published', true)
                                 ->count();
 
     return view('site.auteur', compact('auteur', 'totalPublications'));

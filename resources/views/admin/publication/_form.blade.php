@@ -1,0 +1,603 @@
+
+@php use Illuminate\Support\Facades\Storage; @endphp
+
+<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+  <!-- En-tête du formulaire -->
+  <!-- En-tête du formulaire -->
+  <div class="bg-gradient-to-r from-iri-primary to-iri-secondary px-8 py-6">
+  <div class="flex items-center justify-between">
+  <!-- Informations du titre et icône -->
+  <div class="flex items-center">
+  <!-- Icône de document -->
+  <div class="flex-shrink-0">
+  <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+  </path>
+  </svg>
+  </div>
+  
+  <!-- Titre et description -->
+  <div class="ml-4">
+  <h2 class="text-2xl font-bold text-white">
+  {{ isset($publication) ? 'Modifier la publication' : 'Nouvelle publication' }}
+  </h2>
+  <p class="text-iri-light/80 text-sm mt-1">
+  {{ isset($publication) ? 'Modifiez les informations de cette publication' : 'Créez une nouvelle publication scientifique' }}
+  </p>
+  </div>
+  </div>
+  
+  <!-- Bouton de retour -->
+  <div class="flex-shrink-0">
+  <a href="{{ route('admin.publication.index') }}" 
+  class="inline-flex items-center px-4 py-2 bg-white text-iri-primary rounded-lg hover:bg-gray-50 transition-all duration-200 shadow-sm">
+  <i class="fas fa-arrow-left mr-2"></i>
+  Retour à la liste
+  </a>
+  </div>
+  </div>
+  </div>
+
+  <form id="publicationForm" action="{{ $formAction }}" method="POST" enctype="multipart/form-data" class="p-8">
+  @csrf
+  @if(isset($publication)) @method('PUT') @endif
+
+  <!-- Section Informations Principales -->
+  <div class="space-y-8">
+  <!-- Titre -->
+  <div class="group">
+  <label for="titre" class="flex items-center text-sm font-semibold text-gray-700 mb-3">
+  <svg class="w-4 h-4 mr-2 text-iri-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a.997.997 0 01-1.414 0l-7-7A1.997 1.997 0 013 12V7a4 4 0 014-4z"></path>
+  </svg>
+  Titre de la publication *
+  </label>
+  <div class="relative">
+  <input type="text" 
+  id="titre" 
+  name="titre" 
+  value="{{ old('titre', $publication->titre ?? '') }}"
+  class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-iri-primary focus:border-iri-primary transition-all duration-200 bg-white placeholder-gray-400 @error('titre') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror"
+  placeholder="Saisir le titre de la publication..."
+  required 
+  maxlength="255">
+  <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+  <svg class="h-5 w-5 text-gray-400 group-focus-within:text-iri-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+  </svg>
+  </div>
+  </div>
+  @error('titre')
+  <p class="text-red-500 text-sm mt-2 flex items-center">
+  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+  </svg>
+  {{ $message }}
+  </p>
+  @enderror
+  </div>
+
+  <!-- Résumé -->
+  <div class="group">
+  <label for="resume" class="flex items-center text-sm font-semibold text-gray-700 mb-3">
+  <svg class="w-4 h-4 mr-2 text-iri-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+  </svg>
+  Résumé *
+  </label>
+  <div class="relative">
+  <textarea name="resume" 
+  id="resume" 
+  rows="4" 
+  required
+  class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-iri-primary focus:border-iri-primary transition-all duration-200 bg-white placeholder-gray-400 resize-none @error('resume') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror"
+  placeholder="Rédigez un résumé détaillé de la publication...">{{ old('resume', $publication->resume ?? '') }}</textarea>
+  <div class="absolute bottom-3 right-3 text-xs text-gray-400">
+  <span id="resume-count">0</span> caractères
+  </div>
+  </div>
+  @error('resume')
+  <p class="text-red-500 text-sm mt-2 flex items-center">
+  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+  </svg>
+  {{ $message }}
+  </p>
+  @enderror
+  </div>
+
+  <!-- Citation -->
+  <div class="group">
+  <label for="citation" class="flex items-center text-sm font-semibold text-gray-700 mb-3">
+  <svg class="w-4 h-4 mr-2 text-iri-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+  </svg>
+  Citation
+  </label>
+  <div class="relative">
+  <textarea name="citation" 
+  id="citation" 
+  rows="3" 
+  class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-iri-primary focus:border-iri-primary transition-all duration-200 bg-white placeholder-gray-400 resize-none @error('citation') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror"
+  placeholder="Citation académique de la publication...">{{ old('citation', $publication->citation ?? '') }}</textarea>
+  </div>
+  <p class="text-xs text-gray-500 mt-2">
+  <svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+  </svg>
+  Format recommandé : Nom, P. (Année). Titre. Revue, Volume(Numéro), pages.
+  </p>
+  @error('citation')
+  <p class="text-red-500 text-sm mt-2 flex items-center">
+  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+  </svg>
+  {{ $message }}
+  </p>
+  @enderror
+  </div>
+
+  <!-- Auteurs -->
+  <div class="group">
+  <div class="flex items-center justify-between mb-3">
+  <label for="auteurs" class="flex items-center text-sm font-semibold text-gray-700">
+  <svg class="w-4 h-4 mr-2 text-iri-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+  </svg>
+  Auteurs *
+  </label>
+  <div class="flex space-x-2">
+  <button type="button" 
+  id="searchAuthorBtn"
+  class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-iri-primary bg-iri-light border border-iri-primary rounded-md hover:bg-iri-primary hover:text-white transition-colors">
+  <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+  </svg>
+  Rechercher
+  </button>
+  <button type="button" 
+  id="createAuthorBtn"
+  class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-green-600 border border-green-600 rounded-md hover:bg-green-700 transition-colors">
+  <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+  </svg>
+  Créer
+  </button>
+  </div>
+  </div>
+  <div class="relative">
+  <select name="auteurs[]" 
+  id="auteurs" 
+  multiple 
+  required
+  class="w-full min-h-[120px] px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-iri-primary focus:border-iri-primary transition-all duration-200 bg-white @error('auteurs') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+  @foreach($auteurs as $auteur)
+  <option value="{{ $auteur->id }}" 
+  class="py-2 px-3 hover:bg-iri-light"
+  {{ in_array($auteur->id, old('auteurs', isset($publication) ? $publication->auteurs->pluck('id')->toArray() : [])) ? 'selected' : '' }}>
+  {{ $auteur->prenom ? $auteur->prenom . ' ' . $auteur->nom : $auteur->nom }}
+  @if($auteur->institution)
+  <span class="text-xs text-gray-500 block">{{ $auteur->institution }}</span>
+  @endif
+  </option>
+  @endforeach
+  </select>
+  </div>
+  <div class="mt-2 flex flex-wrap gap-2">
+  <button type="button" id="selectAllAuthors" class="text-xs bg-iri-primary text-white px-3 py-1 rounded-full hover:bg-iri-secondary transition-colors">
+  Tout sélectionner
+  </button>
+  <button type="button" id="clearAllAuthors" class="text-xs bg-gray-500 text-white px-3 py-1 rounded-full hover:bg-gray-600 transition-colors">
+  Tout désélectionner
+  </button>
+  </div>
+  <p class="text-xs text-gray-500 mt-2">
+  <svg class="w-3 h-3 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+  </svg>
+  Maintenez Ctrl (Windows) ou Cmd (Mac) pour sélectionner plusieurs auteurs
+  </p>
+  @error('auteurs')
+  <p class="text-red-500 text-sm mt-2 flex items-center">
+  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+  </svg>
+  {{ $message }}
+  </p>
+  @enderror
+  </div>
+
+  <!-- Catégorie -->
+  <div class="group">
+  <div class="flex items-center justify-between mb-3">
+  <label for="categorie_id" class="flex items-center text-sm font-semibold text-gray-700">
+  <svg class="w-4 h-4 mr-2 text-iri-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a.997.997 0 01-1.414 0l-7-7A1.997 1.997 0 013 12V7a4 4 0 014-4z"></path>
+  </svg>
+  Catégorie *
+  </label>
+  @can('create', \App\Models\Publication::class)
+  <button type="button" 
+  id="createCategoryBtn"
+  class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-blue-600 border border-blue-600 rounded-md hover:bg-blue-700 transition-colors">
+  <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+  </svg>
+  Nouvelle catégorie
+  </button>
+  @endcan
+  </div>
+  <div class="relative">
+  <select name="categorie_id" 
+  id="categorie_id" 
+  required
+  class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-iri-primary focus:border-iri-primary transition-all duration-200 bg-white @error('categorie_id') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+  <option value="" disabled {{ old('categorie_id', $publication->categorie_id ?? '') == '' ? 'selected' : '' }}>
+  Sélectionner une catégorie
+  </option>
+  @foreach($categories as $categorie)
+  <option value="{{ $categorie->id }}" {{ old('categorie_id', $publication->categorie_id ?? '') == $categorie->id ? 'selected' : '' }}>
+  {{ $categorie->nom }}
+  </option>
+  @endforeach
+  </select>
+  <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+  <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+  </svg>
+  </div>
+  </div>
+  @error('categorie_id')
+  <p class="text-red-500 text-sm mt-2 flex items-center">
+  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+  </svg>
+  {{ $message }}
+  </p>
+  @enderror
+  </div>
+
+  <!-- Fichier -->
+  <div class="group">
+  <label for="fichier_pdf" class="flex items-center text-sm font-semibold text-gray-700 mb-3">
+  <svg class="w-4 h-4 mr-2 text-iri-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+  </svg>
+  Fichier de la publication *
+  @if(!isset($publication))
+  <span class="ml-2 text-red-500 text-xs">(Obligatoire)</span>
+  @endif
+  </label>
+  <div class="space-y-4">
+  <!-- Zone de dépôt de fichier -->
+  <div class="group relative border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-blue-500 transition-colors duration-200 @error('fichier_pdf') border-red-300 @enderror">
+  <input type="file" 
+  id="fichier_pdf" 
+  name="fichier_pdf" 
+  accept=".pdf"
+  @if(!isset($publication)) required @endif
+  class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+  <div class="text-center">
+  <svg class="mx-auto h-12 w-12 text-gray-400 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 48 48">
+  <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>
+  <div class="mt-4">
+  <p class="text-sm text-gray-600">
+  <span class="font-medium text-blue-600 hover:text-blue-700 cursor-pointer">Cliquez pour sélectionner</span> ou glissez un fichier
+  </p>
+  <p class="text-xs text-gray-500 mt-1">PDF uniquement, jusqu'à 50MB</p>
+  <!-- Information sur les miniatures automatiques -->
+  <div class="mt-3 p-2 bg-blue-50 rounded-md border border-blue-200">
+  <p class="text-xs text-blue-700 flex items-center justify-center">
+  <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+  </svg>
+  La miniature de la première page sera générée automatiquement
+  </p>
+  </div>
+  @if(!isset($publication))
+  <p class="text-xs text-red-500 mt-1 font-medium">* Fichier obligatoire pour créer une publication</p>
+  @endif
+  </div>
+  </div>
+  </div>
+
+  <!-- Fichier actuel (si il existe) -->
+  @if(isset($publication) && $publication->fichier_pdf)
+  <div class="bg-white rounded-lg border border-gray-200 p-4">
+  <div class="flex items-start space-x-4">
+  <div class="flex-shrink-0">
+  @php
+  $extension = strtolower(pathinfo($publication->fichier_pdf, PATHINFO_EXTENSION));
+  $iconColor = $extension === 'pdf' ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-600';
+  @endphp
+  <div class="w-12 h-12 {{ $iconColor }} rounded-lg flex items-center justify-center">
+  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+  <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"></path>
+  </svg>
+  </div>
+  </div>
+  <div class="flex-1 min-w-0">
+  <div class="flex items-center mb-2">
+  <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+  </svg>
+  <span class="text-sm font-medium text-green-700">Fichier actuel</span>
+  @php
+  $extension = strtoupper(pathinfo($publication->fichier_pdf, PATHINFO_EXTENSION));
+  @endphp
+  <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
+  {{ $extension }}
+  </span>
+  </div>
+  <p class="text-sm text-gray-600 truncate" title="{{ $publication->fichier_pdf }}">
+  {{ pathinfo($publication->fichier_pdf, PATHINFO_FILENAME) }}
+  </p>
+  <p class="text-xs text-gray-400 mt-1">
+  Format : <span class="font-medium">{{ $extension }}</span> • Sélectionnez un nouveau fichier PDF pour le remplacer
+  </p>
+  </div>
+  <div class="flex-shrink-0">
+  <a href="{{ Storage::url($publication->fichier_pdf) }}" 
+  target="_blank" 
+  class="inline-flex items-center px-3 py-1.5 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-iri-primary">
+  <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+  </svg>
+  Télécharger
+  </a>
+  </div>
+  </div>
+  </div>
+  @endif
+  </div>
+  @error('fichier_pdf')
+  <p class="text-red-500 text-sm mt-2 flex items-center">
+  <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+  </svg>
+  {{ $message }}
+  </p>
+  @enderror
+  </div>
+
+  <!-- Options de publication -->
+  <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+  <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+  <svg class="w-5 h-5 mr-2 text-iri-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+  </svg>
+  Options de publication
+  </h3>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <!-- À la une -->
+  <div class="relative">
+  <div class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-white hover:shadow-sm transition-all duration-200 bg-white" 
+  onclick="toggleCheckbox('a_la_une')" id="label_a_la_une">
+  <input type="checkbox" 
+  name="a_la_une" 
+  id="a_la_une" 
+  class="hidden" 
+  value="1"
+  {{ old('a_la_une', $publication->a_la_une ?? false) ? 'checked' : '' }}>
+  <div class="flex-shrink-0">
+  <div class="w-5 h-5 rounded border-2 border-gray-300 flex items-center justify-center" id="visual_a_la_une">
+  <svg class="w-3 h-3 text-white hidden" fill="currentColor" viewBox="0 0 20 20" id="icon_a_la_une">
+  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+  </svg>
+  </div>
+  </div>
+  <div class="ml-3">
+  <span class="text-sm font-medium text-gray-700">À la une</span>
+  <p class="text-xs text-gray-500">Afficher en première position</p>
+  </div>
+  </div>
+  </div>
+
+  <!-- En vedette -->
+  <div class="relative">
+  <div class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-white hover:shadow-sm transition-all duration-200 bg-white" 
+  onclick="toggleCheckbox('en_vedette')" id="label_en_vedette">
+  <input type="checkbox" 
+  name="en_vedette" 
+  id="en_vedette" 
+  class="hidden" 
+  value="1"
+  {{ old('en_vedette', $publication->en_vedette ?? false) ? 'checked' : '' }}>
+  <div class="flex-shrink-0">
+  <div class="w-5 h-5 rounded border-2 border-gray-300 flex items-center justify-center" id="visual_en_vedette">
+  <svg class="w-3 h-3 text-white hidden" fill="currentColor" viewBox="0 0 20 20" id="icon_en_vedette">
+  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+  </svg>
+  </div>
+  </div>
+  <div class="ml-3">
+  <span class="text-sm font-medium text-gray-700">En vedette</span>
+  <p class="text-xs text-gray-500">Mettre en valeur cette publication</p>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- Boutons d'action -->
+  <div class="flex items-center justify-between pt-6 border-t border-gray-200">
+  <a href="{{ route('admin.publication.index') }}" 
+  class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-iri-primary transition-all duration-200">
+  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+  </svg>
+  Annuler
+  </a>
+  
+  <button type="submit" 
+  class="inline-flex items-center px-8 py-3 border border-transparent rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-iri-primary to-iri-secondary hover:from-iri-secondary hover:to-iri-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-iri-primary transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+  </svg>
+  {{ isset($publication) ? 'Mettre à jour' : 'Enregistrer' }}
+  </button>
+  </div>
+  </div>
+  </form>
+</div>
+
+<!-- Modal de recherche/création d'auteurs -->
+<div id="authorModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 hidden">
+  <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
+  <div class="mt-3">
+  <!-- En-tête du modal -->
+  <div class="flex justify-between items-center pb-4 border-b border-gray-200">
+  <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+  <svg class="w-5 h-5 mr-2 text-iri-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+  </svg>
+  Gestion des auteurs
+  </h3>
+  <button type="button" id="closeAuthorModal" class="text-gray-400 hover:text-gray-600">
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+  </svg>
+  </button>
+  </div>
+
+  <!-- Onglets -->
+  <div class="mt-4">
+  <div class="border-b border-gray-200">
+  <nav class="-mb-px flex space-x-8">
+  <button type="button" id="searchAuthorTab" class="author-tab active py-2 px-1 border-b-2 border-iri-primary text-iri-primary font-medium text-sm">
+  Rechercher
+  </button>
+  <button type="button" id="createAuthorTab" class="author-tab py-2 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-sm">
+  Créer nouveau
+  </button>
+  </nav>
+  </div>
+
+  <!-- Contenu recherche -->
+  <div id="searchAuthorContent" class="author-content mt-4">
+  <div class="mb-4">
+  <label for="authorSearch" class="block text-sm font-medium text-gray-700 mb-2">Rechercher un auteur</label>
+  <div class="relative">
+  <input type="text" 
+  id="authorSearch" 
+  placeholder="Tapez le nom de l'auteur..."
+  class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-iri-primary focus:border-iri-primary">
+  <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+  <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+  </svg>
+  </div>
+  </div>
+  </div>
+  <div id="authorSearchResults" class="max-h-60 overflow-y-auto border border-gray-200 rounded-md">
+  <div class="p-4 text-center text-gray-500">
+  Commencez à taper pour rechercher des auteurs...
+  </div>
+  </div>
+  </div>
+
+  <!-- Contenu création -->
+  <div id="createAuthorContent" class="author-content mt-4 hidden">
+  <form id="createAuthorForm" class="space-y-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div>
+  <label for="authorNom" class="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
+  <input type="text" 
+  id="authorNom" 
+  name="nom" 
+  required
+  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-iri-primary focus:border-iri-primary">
+  </div>
+  <div>
+  <label for="authorPrenom" class="block text-sm font-medium text-gray-700 mb-1">Prénom *</label>
+  <input type="text" 
+  id="authorPrenom" 
+  name="prenom" 
+  required
+  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-iri-primary focus:border-iri-primary">
+  </div>
+  </div>
+  <div>
+  <label for="authorEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+  <input type="email" 
+  id="authorEmail" 
+  name="email"
+  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-iri-primary focus:border-iri-primary">
+  </div>
+  <div>
+  <label for="authorInstitution" class="block text-sm font-medium text-gray-700 mb-1">Institution</label>
+  <input type="text" 
+  id="authorInstitution" 
+  name="institution"
+  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-iri-primary focus:border-iri-primary">
+  </div>
+  <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+  <button type="button" id="cancelCreateAuthor" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+  Annuler
+  </button>
+  <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-iri-primary border border-transparent rounded-md hover:bg-iri-secondary">
+  Créer l'auteur
+  </button>
+  </div>
+  </form>
+  </div>
+  </div>
+  </div>
+  </div>
+</div>
+
+<!-- Modal de création de catégorie -->
+<div id="categoryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50 hidden">
+  <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-1/2 lg:w-1/3 shadow-lg rounded-md bg-white">
+  <div class="mt-3">
+  <!-- En-tête du modal -->
+  <div class="flex justify-between items-center pb-4 border-b border-gray-200">
+  <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+  <svg class="w-5 h-5 mr-2 text-iri-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a.997.997 0 01-1.414 0l-7-7A1.997 1.997 0 013 12V7a4 4 0 014-4z"></path>
+  </svg>
+  Nouvelle catégorie
+  </h3>
+  <button type="button" id="closeCategoryModal" class="text-gray-400 hover:text-gray-600">
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+  </svg>
+  </button>
+  </div>
+
+  <!-- Formulaire de création -->
+  <form id="createCategoryForm" class="mt-4 space-y-4">
+  <div>
+  <label for="categoryNom" class="block text-sm font-medium text-gray-700 mb-1">Nom de la catégorie *</label>
+  <input type="text" 
+  id="categoryNom" 
+  name="nom" 
+  required
+  placeholder="Ex: Recherche en Intelligence Artificielle"
+  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-iri-primary focus:border-iri-primary">
+  </div>
+  <div>
+  <label for="categoryDescription" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+  <textarea id="categoryDescription" 
+  name="description" 
+  rows="3"
+  placeholder="Description optionnelle de la catégorie..."
+  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-iri-primary focus:border-iri-primary resize-none"></textarea>
+  </div>
+  <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+  <button type="button" id="cancelCreateCategory" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+  Annuler
+  </button>
+  <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-iri-primary border border-transparent rounded-md hover:bg-iri-secondary">
+  Créer la catégorie
+  </button>
+  </div>
+  </form>
+  </div>
+  </div>
+</div>
+
+<script src="{{ asset('js/admin/publication-form.js') }}" defer></script>

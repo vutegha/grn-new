@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Isolé - Actualités 2x4 Layout</title>
+    <link rel="stylesheet" href="{{ asset('css/test-audit-actualites.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Styles de base uniquement pour la page de test */
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+        
+        .test-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header-test {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 50%, #7c3aed 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .controls {
+            padding: 1rem;
+            background: #f1f5f9;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .control-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background 0.2s;
+        }
+        
+        .control-button:hover {
+            background: #2563eb;
+        }
+        
+        .control-button.active {
+            background: #059669;
+        }
+        
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border-radius: 6px;
+            font-size: 0.875rem;
+        }
+        
+        .status-ok {
+            color: #059669;
+        }
+        
+        .status-error {
+            color: #dc2626;
+        }
+        
+        .status-warning {
+            color: #d97706;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-container">
+        <div class="header-test">
+            <h1><i class="fas fa-microscope"></i> Audit CSS Isolé - Layout 2x4</h1>
+            <p>Diagnostic des conflits CSS pour les actualités liées</p>
+        </div>
+
+        <div class="controls">
+            <button class="control-button" onclick="toggleDebugOutlines()">
+                <i class="fas fa-eye"></i> Debug Outlines
+            </button>
+            <button class="control-button" onclick="toggleGridInfo()">
+                <i class="fas fa-info"></i> Grid Info
+            </button>
+            <button class="control-button" onclick="testResponsive()">
+                <i class="fas fa-mobile-alt"></i> Test Responsive
+            </button>
+            <button class="control-button" onclick="validateLayout()">
+                <i class="fas fa-check"></i> Valider Layout
+            </button>
+
+            <div class="status-indicator">
+                <i class="fas fa-circle status-indicator-icon"></i>
+                <span class="status-text">Prêt pour audit</span>
+            </div>
+        </div>
+
+        <div class="test-audit-container">
+            <div class="p-8">
+                <h2 style="text-align: center; margin-bottom: 2rem; color: #1e40af;">
+                    Test Layout 4 Colonnes x 2 Lignes
+                </h2>
+
+                <div class="articles-grid">
+                    <!-- Ligne 1 -->
+                    <article class="article-card">
+                        <div class="article-image">
+                            <div class="article-image-placeholder">
+                                <i class="fas fa-newspaper"></i>
+                                <div class="placeholder-text">Carte 1</div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="flex-1">
+                                <h3 class="article-title">
+                                    <a href="#">Première actualité de test pour validation</a>
+                                </h3>
+                                <p class="article-excerpt">
+                                    Contenu de test pour vérifier l'affichage correct du layout en 2 lignes de 4 colonnes chacune.
+                                </p>
+                            </div>
+                            <div class="article-meta">
+                                <div class="article-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <time>01 Nov 2024</time>
+                                </div>
+                                <a href="#" class="article-read-more">
+                                    <span>Lire</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-image">
+                            <div class="article-image-placeholder">
+                                <i class="fas fa-newspaper"></i>
+                                <div class="placeholder-text">Carte 2</div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="flex-1">
+                                <h3 class="article-title">
+                                    <a href="#">Deuxième actualité avec titre plus long pour tester</a>
+                                </h3>
+                                <p class="article-excerpt">
+                                    Test avec contenu variable pour valider le comportement des cartes avec différentes longueurs de texte.
+                                </p>
+                            </div>
+                            <div class="article-meta">
+                                <div class="article-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <time>01 Nov 2024</time>
+                                </div>
+                                <a href="#" class="article-read-more">
+                                    <span>Lire</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-image">
+                            <div class="article-image-placeholder">
+                                <i class="fas fa-newspaper"></i>
+                                <div class="placeholder-text">Carte 3</div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="flex-1">
+                                <h3 class="article-title">
+                                    <a href="#">Troisième actualité</a>
+                                </h3>
+                                <p class="article-excerpt">
+                                    Contenu de validation pour la troisième position de la première ligne.
+                                </p>
+                            </div>
+                            <div class="article-meta">
+                                <div class="article-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <time>01 Nov 2024</time>
+                                </div>
+                                <a href="#" class="article-read-more">
+                                    <span>Lire</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-image">
+                            <div class="article-image-placeholder">
+                                <i class="fas fa-newspaper"></i>
+                                <div class="placeholder-text">Carte 4</div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="flex-1">
+                                <h3 class="article-title">
+                                    <a href="#">Quatrième actualité - Fin ligne 1</a>
+                                </h3>
+                                <p class="article-excerpt">
+                                    Dernière carte de la première ligne pour compléter la rangée de 4 colonnes.
+                                </p>
+                            </div>
+                            <div class="article-meta">
+                                <div class="article-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <time>01 Nov 2024</time>
+                                </div>
+                                <a href="#" class="article-read-more">
+                                    <span>Lire</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Ligne 2 -->
+                    <article class="article-card">
+                        <div class="article-image">
+                            <div class="article-image-placeholder">
+                                <i class="fas fa-newspaper"></i>
+                                <div class="placeholder-text">Carte 5</div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="flex-1">
+                                <h3 class="article-title">
+                                    <a href="#">Cinquième actualité - Début ligne 2</a>
+                                </h3>
+                                <p class="article-excerpt">
+                                    Première carte de la deuxième ligne pour valider la structure en grille 4x2.
+                                </p>
+                            </div>
+                            <div class="article-meta">
+                                <div class="article-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <time>01 Nov 2024</time>
+                                </div>
+                                <a href="#" class="article-read-more">
+                                    <span>Lire</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-image">
+                            <div class="article-image-placeholder">
+                                <i class="fas fa-newspaper"></i>
+                                <div class="placeholder-text">Carte 6</div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="flex-1">
+                                <h3 class="article-title">
+                                    <a href="#">Sixième actualité de test</a>
+                                </h3>
+                                <p class="article-excerpt">
+                                    Contenu pour la sixième position dans la grille 2x4.
+                                </p>
+                            </div>
+                            <div class="article-meta">
+                                <div class="article-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <time>01 Nov 2024</time>
+                                </div>
+                                <a href="#" class="article-read-more">
+                                    <span>Lire</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-image">
+                            <div class="article-image-placeholder">
+                                <i class="fas fa-newspaper"></i>
+                                <div class="placeholder-text">Carte 7</div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="flex-1">
+                                <h3 class="article-title">
+                                    <a href="#">Septième actualité</a>
+                                </h3>
+                                <p class="article-excerpt">
+                                    Avant-dernière carte pour compléter le test de validation du layout.
+                                </p>
+                            </div>
+                            <div class="article-meta">
+                                <div class="article-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <time>01 Nov 2024</time>
+                                </div>
+                                <a href="#" class="article-read-more">
+                                    <span>Lire</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-image">
+                            <div class="article-image-placeholder">
+                                <i class="fas fa-newspaper"></i>
+                                <div class="placeholder-text">Carte 8</div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div class="flex-1">
+                                <h3 class="article-title">
+                                    <a href="#">Huitième et dernière actualité</a>
+                                </h3>
+                                <p class="article-excerpt">
+                                    Dernière carte pour finaliser le layout 2 lignes x 4 colonnes.
+                                </p>
+                            </div>
+                            <div class="article-meta">
+                                <div class="article-date">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <time>01 Nov 2024</time>
+                                </div>
+                                <a href="#" class="article-read-more">
+                                    <span>Lire</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panneau d'information debug (masqué par défaut) -->
+    <div class="debug-grid-info" id="debugInfo" style="display: none;">
+        <h4>📊 Informations CSS Grid</h4>
+        <p><strong>Colonnes:</strong> <span id="gridCols">-</span></p>
+        <p><strong>Lignes:</strong> <span id="gridRows">-</span></p>
+        <p><strong>Gap:</strong> <span id="gridGap">-</span></p>
+        <p><strong>Hauteur Grid:</strong> <span id="gridHeight">-</span></p>
+        <p><strong>Cartes visibles:</strong> <span id="cardCount">-</span></p>
+        <p><strong>Breakpoint actif:</strong> <span id="activeBreakpoint">-</span></p>
+    </div>
+
+    <script>
+        let debugMode = false;
+        let gridInfoVisible = false;
+
+        function toggleDebugOutlines() {
+            debugMode = !debugMode;
+            const container = document.querySelector('.test-audit-container');
+            const button = event.target;
+
+            if (debugMode) {
+                container.classList.add('debug-outline');
+                button.classList.add('active');
+                updateStatus('Debug activé', 'warning');
+            } else {
+                container.classList.remove('debug-outline');
+                button.classList.remove('active');
+                updateStatus('Debug désactivé', 'ok');
+            }
+        }
+
+        function toggleGridInfo() {
+            gridInfoVisible = !gridInfoVisible;
+            const debugInfo = document.getElementById('debugInfo');
+            const button = event.target;
+
+            if (gridInfoVisible) {
+                debugInfo.style.display = 'block';
+                button.classList.add('active');
+                updateGridInfo();
+                updateStatus('Info Grid affichées', 'ok');
+            } else {
+                debugInfo.style.display = 'none';
+                button.classList.remove('active');
+                updateStatus('Info Grid masquées', 'ok');
+            }
+        }
+
+        function updateGridInfo() {
+            const grid = document.querySelector('.articles-grid');
+            const cards = document.querySelectorAll('.article-card');
+
+            if (grid) {
+                const styles = window.getComputedStyle(grid);
+                document.getElementById('gridCols').textContent = styles.gridTemplateColumns;
+                document.getElementById('gridRows').textContent = styles.gridTemplateRows;
+                document.getElementById('gridGap').textContent = styles.gap;
+                document.getElementById('gridHeight').textContent = styles.height;
+                document.getElementById('cardCount').textContent = cards.length;
+
+                // Déterminer le breakpoint actif
+                const width = window.innerWidth;
+                let breakpoint = 'XL (1024px+)';
+                if (width <= 640) breakpoint = 'Mobile (≤640px)';
+                else if (width <= 768) breakpoint = 'SM (641-768px)';
+                else if (width <= 1023) breakpoint = 'MD (769-1023px)';
+
+                document.getElementById('activeBreakpoint').textContent = breakpoint;
+            }
+        }
+
+        function testResponsive() {
+            const sizes = [{
+                width: 320,
+                height: 568,
+                name: 'Mobile (320px)'
+            }, {
+                width: 768,
+                height: 1024,
+                name: 'Tablet (768px)'
+            }, {
+                width: 1024,
+                height: 768,
+                name: 'Desktop (1024px)'
+            }, {
+                width: 1440,
+                height: 900,
+                name: 'Large (1440px)'
+            }];
+
+            alert('Test responsive : Redimensionnez votre fenêtre ou utilisez les outils développeur (F12) pour tester les différentes tailles.');
+            updateStatus('Mode test responsive', 'warning');
+        }
+
+        function validateLayout() {
+            const grid = document.querySelector('.articles-grid');
+            const cards = document.querySelectorAll('.article-card');
+            const issues = [];
+
+            // Vérification du nombre de cartes
+            if (cards.length !== 8) {
+                issues.push(`Nombre de cartes incorrect: ${cards.length}/8`);
+            }
+
+            // Vérification des styles de grille
+            if (grid) {
+                const styles = window.getComputedStyle(grid);
+                if (!styles.display.includes('grid')) {
+                    issues.push('Display n\'est pas grid');
+                }
+
+                // Vérification des colonnes sur desktop
+                if (window.innerWidth >= 1024) {
+                    const cols = styles.gridTemplateColumns;
+                    if (!cols.includes('1fr 1fr 1fr 1fr') && !cols.includes('repeat(4, 1fr)')) {
+                        issues.push('Grid columns incorrectes sur desktop');
+                    }
+                }
+            }
+
+            // Vérification de la hauteur des cartes
+            cards.forEach((card, index) => {
+                const cardStyles = window.getComputedStyle(card);
+                const height = parseInt(cardStyles.height);
+                if (window.innerWidth >= 1024 && height !== 420) {
+                    issues.push(`Carte ${index + 1}: hauteur ${height}px au lieu de 420px`);
+                }
+            });
+
+            // Résultat de la validation
+            if (issues.length === 0) {
+                updateStatus('✅ Layout conforme !', 'ok');
+                alert('✅ Validation réussie !\n\nLe layout 2x4 est correctement configuré.');
+            } else {
+                updateStatus(`❌ ${issues.length} problème(s) détecté(s)`, 'error');
+                alert('❌ Problèmes détectés :\n\n' + issues.join('\n'));
+            }
+        }
+
+        function updateStatus(message, type) {
+            const statusText = document.querySelector('.status-text');
+            const statusIcon = document.querySelector('.status-indicator-icon');
+
+            statusText.textContent = message;
+            statusIcon.className = `fas fa-circle status-${type}`;
+        }
+
+        // Mise à jour automatique des infos lors du redimensionnement
+        window.addEventListener('resize', () => {
+            if (gridInfoVisible) {
+                updateGridInfo();
+            }
+        });
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🔍 Audit CSS Actualités 2x4 - Prêt');
+            updateStatus('Audit initialisé', 'ok');
+        });
+    </script>
+</body>
+
+</html>

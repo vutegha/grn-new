@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Redirection HTTPS (décommentez si vous avez un certificat SSL)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Redirection vers le dossier public
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>

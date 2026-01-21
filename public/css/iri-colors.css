@@ -1,0 +1,45 @@
+/* Styles de base pour les classes IRI utilisées dans les formulaires */
+
+.text-iri-primary { color: #1e472f !important; }
+.text-iri-secondary { color: #2d5a3f !important; }  
+.text-iri-accent { color: #d2691e !important; }
+.text-iri-gold { color: #b8860b !important; }
+.text-iri-gray { color: #64748b !important; }
+
+.bg-iri-primary { background-color: #1e472f !important; }
+.bg-iri-secondary { background-color: #2d5a3f !important; }
+.bg-iri-accent { background-color: #d2691e !important; }
+.bg-iri-light { background-color: #f0f9f4 !important; }
+.bg-iri-gold { background-color: #b8860b !important; }
+
+.border-iri-primary { border-color: #1e472f !important; }
+.border-iri-secondary { border-color: #2d5a3f !important; }
+
+.focus\:ring-iri-primary:focus { 
+    --tw-ring-color: #1e472f !important; 
+    --tw-ring-opacity: 0.3;
+    box-shadow: 0 0 0 3px rgba(30, 71, 47, 0.3);
+}
+
+.focus\:ring-iri-secondary:focus { 
+    --tw-ring-color: #2d5a3f !important; 
+    --tw-ring-opacity: 0.3;
+    box-shadow: 0 0 0 3px rgba(45, 90, 63, 0.3);
+}
+
+.focus\:ring-iri-accent:focus { 
+    --tw-ring-color: #d2691e !important; 
+    --tw-ring-opacity: 0.3;
+    box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.3);
+}
+
+.focus\:ring-iri-gold:focus { 
+    --tw-ring-color: #b8860b !important; 
+    --tw-ring-opacity: 0.3;
+    box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.3);
+}
+
+.from-iri-primary { --tw-gradient-from: #1e472f !important; }
+.to-iri-secondary { --tw-gradient-to: #2d5a3f !important; }
+.hover\:from-iri-secondary:hover { --tw-gradient-from: #2d5a3f !important; }
+.hover\:to-iri-primary:hover { --tw-gradient-to: #1e472f !important; }

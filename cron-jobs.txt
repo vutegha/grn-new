@@ -1,0 +1,57 @@
+# Configuration Cron Jobs pour GRN IRI Admin
+
+# ========================================
+# Instructions:
+# ========================================
+# 1. Ouvrir crontab: crontab -e
+# 2. Copier les lignes ci-dessous
+# 3. Modifier les chemins selon votre configuration
+# 4. Sauvegarder et quitter
+#
+# Pour cPanel:
+# - Aller dans "Cron Jobs"
+# - Ajouter chaque commande avec son planning
+# ========================================
+
+# Laravel Task Scheduler - Exécution chaque minute
+# Cette commande unique gère tous les tâches planifiées de Laravel
+* * * * * cd /home/user/grn && php artisan schedule:run >> /dev/null 2>&1
+
+# Sauvegarde quotidienne de la base de données (2h du matin)
+0 2 * * * cd /home/user/grn && php artisan backup:run >> /home/user/grn/storage/logs/backup.log 2>&1
+
+# Nettoyage des anciennes sessions (tous les jours à 3h)
+0 3 * * * cd /home/user/grn && php artisan session:gc >> /dev/null 2>&1
+
+# Nettoyage des logs de plus de 30 jours (chaque dimanche à minuit)
+0 0 * * 0 cd /home/user/grn && find storage/logs -name "*.log" -mtime +30 -delete
+
+# Nettoyage des fichiers temporaires (chaque jour à 4h)
+0 4 * * * cd /home/user/grn && find storage/app/temp -type f -mtime +7 -delete
+
+# Optimisation de la base de données (chaque lundi à 5h)
+0 5 * * 1 cd /home/user/grn && php artisan db:optimize >> /dev/null 2>&1
+
+# Restart Queue Workers (toutes les heures pour éviter les fuites mémoire)
+0 * * * * cd /home/user/grn && php artisan queue:restart >> /dev/null 2>&1
+
+# ========================================
+# Tâches Optionnelles
+# ========================================
+
+# Génération de rapports quotidiens (8h du matin)
+# 0 8 * * * cd /home/user/grn && php artisan reports:generate >> /home/user/grn/storage/logs/reports.log 2>&1
+
+# Nettoyage du cache (chaque semaine)
+# 0 0 * * 0 cd /home/user/grn && php artisan cache:clear >> /dev/null 2>&1
+
+# Envoi de notifications hebdomadaires (lundi 9h)
+# 0 9 * * 1 cd /home/user/grn && php artisan notifications:send-weekly >> /dev/null 2>&1
+
+# ========================================
+# Notes:
+# ========================================
+# - Remplacer /home/user/grn par le chemin réel de votre application
+# - Vérifier que le bon PHP est utilisé (php ou /usr/bin/php8.2)
+# - Les logs sont stockés dans storage/logs/
+# - Tester les commandes manuellement avant de les ajouter au cron

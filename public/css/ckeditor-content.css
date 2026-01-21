@@ -1,0 +1,574 @@
+/**
+ * Feuille de style CSS personnalisée pour le contenu CKEditor
+ * Utilise la charte graphique IRI-UCBC
+ * Améliore la lisibilité et donne un style moderne aux articles
+ * PRIORITAIRE par rapport aux styles du layout
+ * 
+ * Cette feuille de style surcharge tous les autres styles grâce à :
+ * - Sélecteurs plus spécifiques
+ * - Règles !important sur les propriétés critiques
+ * - Chargement en dernier dans l'ordre des CSS
+ */
+
+
+/* Reset spécifique pour éviter les conflits avec Tailwind et autres frameworks */
+
+.article-content *,
+.rich-text-content.article-content *,
+div.article-content * {
+    box-sizing: border-box;
+}
+
+
+/* Suppression des styles prose de Tailwind qui pourraient interférer */
+
+.article-content.prose,
+.rich-text-content.article-content.prose,
+div.article-content.prose {
+    max-width: none !important;
+}
+
+.article-content .prose,
+.rich-text-content.article-content .prose,
+div.article-content .prose {
+    max-width: none !important;
+}
+
+.article-content,
+.rich-text-content.article-content,
+div.article-content {
+    /* Base typography selon la charte IRI - PRIORITAIRE */
+    font-family: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
+    font-size: 1rem !important;
+    line-height: 1.75 !important;
+    color: #1a1a1a !important;
+    /* iri-dark */
+    word-wrap: break-word !important;
+    hyphens: auto !important;
+}
+
+
+/* Paragraphes - PRIORITAIRE */
+
+.article-content p,
+.rich-text-content.article-content p,
+div.article-content p {
+    margin: 0 0 1.5rem 0 !important;
+    text-align: justify !important;
+    text-justify: inter-word !important;
+}
+
+.article-content p:last-child,
+.rich-text-content.article-content p:last-child,
+div.article-content p:last-child {
+    margin-bottom: 0 !important;
+}
+
+
+/* Titres avec hiérarchie visuelle selon la charte IRI - PRIORITAIRE */
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6,
+.rich-text-content.article-content h1,
+.rich-text-content.article-content h2,
+.rich-text-content.article-content h3,
+.rich-text-content.article-content h4,
+.rich-text-content.article-content h5,
+.rich-text-content.article-content h6,
+div.article-content h1,
+div.article-content h2,
+div.article-content h3,
+div.article-content h4,
+div.article-content h5,
+div.article-content h6 {
+    font-family: 'Instrument Sans', sans-serif !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    color: #1e472f !important;
+    /* iri-primary */
+    margin-top: 2.5rem !important;
+    margin-bottom: 1rem !important;
+    scroll-margin-top: 80px !important;
+    /* Pour les ancres avec header fixe */
+}
+
+.article-content h1,
+.rich-text-content.article-content h1,
+div.article-content h1 {
+    font-size: 2.25rem !important;
+    margin-top: 0 !important;
+    border-bottom: 3px solid #1e472f !important;
+    /* iri-primary */
+    padding-bottom: 0.5rem !important;
+}
+
+.article-content h2,
+.rich-text-content.article-content h2,
+div.article-content h2 {
+    font-size: 1.875rem !important;
+    color: #1e472f !important;
+    /* iri-primary */
+    position: relative !important;
+    padding-left: 1rem !important;
+}
+
+.article-content h2::before,
+.rich-text-content.article-content h2::before,
+div.article-content h2::before {
+    content: '' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0.25rem !important;
+    width: 4px !important;
+    height: 1.5rem !important;
+    background: linear-gradient(to bottom, #1e472f, #2d5a3f) !important;
+    /* iri-primary to iri-secondary */
+    border-radius: 2px !important;
+}
+
+.article-content h3,
+.rich-text-content.article-content h3,
+div.article-content h3 {
+    font-size: 1.5rem !important;
+    color: #2d5a3f !important;
+    /* iri-secondary */
+}
+
+.article-content h4,
+.rich-text-content.article-content h4,
+div.article-content h4 {
+    font-size: 1.25rem !important;
+    color: #2d5a3f !important;
+    /* iri-secondary */
+    font-weight: 600 !important;
+}
+
+.article-content h5,
+.rich-text-content.article-content h5,
+div.article-content h5 {
+    font-size: 1.125rem !important;
+    color: #2d5a3f !important;
+    /* iri-secondary */
+    font-weight: 600 !important;
+}
+
+.article-content h6,
+.rich-text-content.article-content h6,
+div.article-content h6 {
+    font-size: 1rem !important;
+    color: #64748b !important;
+    /* iri-gray */
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+
+/* Liens hypertextes avec effet hover selon la charte IRI - PRIORITAIRE */
+
+.article-content a,
+.rich-text-content.article-content a,
+div.article-content a {
+    color: #1e472f !important;
+    /* iri-primary */
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    position: relative !important;
+    transition: all 0.2s ease-in-out !important;
+    border-bottom: 1px solid transparent !important;
+}
+
+.article-content a:hover,
+.rich-text-content.article-content a:hover,
+div.article-content a:hover {
+    color: #2d5a3f !important;
+    /* iri-secondary */
+    border-bottom-color: #d2691e !important;
+    /* iri-accent */
+    background: linear-gradient(120deg, rgba(30, 71, 47, 0.1) 0%, rgba(30, 71, 47, 0.05) 100%) !important;
+    padding: 2px 4px !important;
+    margin: -2px -4px !important;
+    border-radius: 4px !important;
+}
+
+.article-content a:focus,
+.rich-text-content.article-content a:focus,
+div.article-content a:focus {
+    outline: 2px solid #1e472f !important;
+    /* iri-primary */
+    outline-offset: 2px !important;
+    border-radius: 4px !important;
+}
+
+
+/* Listes avec espacement amélioré */
+
+.article-content ul,
+.article-content ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+
+.article-content li {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.article-content ul li {
+    list-style-type: none;
+    position: relative;
+}
+
+.article-content ul li::before {
+    content: '•';
+    color: #1e472f;
+    /* iri-primary */
+    font-weight: bold;
+    position: absolute;
+    left: -1.5rem;
+    font-size: 1.2em;
+}
+
+.article-content ol li {
+    counter-increment: item;
+}
+
+.article-content ol {
+    counter-reset: item;
+}
+
+.article-content ol li::marker {
+    color: #1e472f;
+    /* iri-primary */
+    font-weight: 600;
+}
+
+
+/* Citations avec style élégant selon la charte IRI - PRIORITAIRE */
+
+.article-content blockquote,
+.rich-text-content.article-content blockquote,
+div.article-content blockquote {
+    margin: 2rem 0 !important;
+    padding: 1.5rem 2rem !important;
+    border-left: 4px solid #1e472f !important;
+    /* iri-primary */
+    background: linear-gradient(90deg, rgba(30, 71, 47, 0.05) 0%, rgba(30, 71, 47, 0.02) 100%) !important;
+    border-radius: 0 8px 8px 0 !important;
+    font-style: italic !important;
+    font-size: 1.1rem !important;
+    color: #64748b !important;
+    /* iri-gray */
+    position: relative !important;
+}
+
+.article-content blockquote::before,
+.rich-text-content.article-content blockquote::before,
+div.article-content blockquote::before {
+    content: '"' !important;
+    font-size: 4rem !important;
+    color: #1e472f !important;
+    /* iri-primary */
+    opacity: 0.3 !important;
+    position: absolute !important;
+    top: -10px !important;
+    left: 10px !important;
+    font-family: Georgia, serif !important;
+}
+
+.article-content blockquote p {
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.article-content blockquote cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.article-content blockquote cite::before {
+    content: '— ';
+}
+
+
+/* Images et figures responsives - PRIORITAIRE */
+
+.article-content figure,
+.rich-text-content.article-content figure,
+div.article-content figure {
+    margin: 2rem 0 !important;
+    text-align: center !important;
+}
+
+.article-content figure img,
+.rich-text-content.article-content figure img,
+div.article-content figure img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.article-content figure img:hover,
+.rich-text-content.article-content figure img:hover,
+div.article-content figure img:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+
+/* Légendes d'images stylées selon la charte IRI - PRIORITAIRE */
+
+.article-content figcaption,
+.rich-text-content.article-content figcaption,
+div.article-content figcaption {
+    margin-top: 0.75rem !important;
+    font-size: 0.875rem !important;
+    color: #64748b !important;
+    /* iri-gray */
+    font-style: italic !important;
+    text-align: center !important;
+    line-height: 1.5 !important;
+    padding: 0 1rem !important;
+}
+
+
+/* Images standalone (sans figure) */
+
+.article-content img:not(figure img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin: 1rem 0;
+    display: block;
+}
+
+
+/* Références bibliographiques selon la charte IRI */
+
+.article-content sup {
+    font-size: 0.75rem;
+    vertical-align: super;
+    color: #1e472f;
+    /* iri-primary */
+    font-weight: 600;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+.article-content sup:hover {
+    background-color: rgba(30, 71, 47, 0.1);
+}
+
+.article-content ol.references {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e5e7eb;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.article-content ol.references li,
+.article-content li.reference {
+    margin: 1rem 0;
+    color: #4b5563;
+    padding-left: 0.5rem;
+}
+
+.article-content ol.references li::marker {
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
+
+/* Tables responsives selon la charte IRI */
+
+.article-content table {
+    width: 100%;
+    margin: 2rem 0;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.article-content table thead {
+    background: linear-gradient(135deg, #1e472f, #2d5a3f);
+    /* iri-primary to iri-secondary */
+    color: white;
+}
+
+.article-content table th,
+.article-content table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.article-content table th {
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.article-content table tbody tr:hover {
+    background-color: rgba(30, 71, 47, 0.05);
+    /* iri-primary avec transparence */
+}
+
+.article-content table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Code et préformatage selon la charte IRI */
+
+.article-content code {
+    background-color: #f0f9f4;
+    /* iri-light */
+    color: #d2691e;
+    /* iri-accent */
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.article-content pre {
+    background-color: #1f2937;
+    color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 2rem 0;
+    line-height: 1.5;
+}
+
+.article-content pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+
+/* Séparateurs selon la charte IRI */
+
+.article-content hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #64748b, transparent);
+    /* iri-gray */
+    margin: 3rem 0;
+}
+
+
+/* Surcharge des classes utilitaires Tailwind */
+
+.article-content[class*="text-"],
+.rich-text-content.article-content[class*="text-"],
+div.article-content[class*="text-"] {
+    color: #1a1a1a !important;
+    /* Force la couleur de base */
+}
+
+.article-content h1[class*="text-"],
+.article-content h2[class*="text-"],
+.article-content h3[class*="text-"],
+.article-content h4[class*="text-"],
+.article-content h5[class*="text-"],
+.article-content h6[class*="text-"],
+.rich-text-content.article-content h1[class*="text-"],
+.rich-text-content.article-content h2[class*="text-"],
+.rich-text-content.article-content h3[class*="text-"],
+.rich-text-content.article-content h4[class*="text-"],
+.rich-text-content.article-content h5[class*="text-"],
+.rich-text-content.article-content h6[class*="text-"] {
+    color: #1e472f !important;
+    /* Force les couleurs des titres selon la charte IRI */
+}
+
+.article-content a[class*="text-"],
+.rich-text-content.article-content a[class*="text-"] {
+    color: #1e472f !important;
+    /* Force la couleur des liens */
+}
+
+
+/* Responsivité */
+
+@media (max-width: 768px) {
+    .article-content,
+    .rich-text-content.article-content,
+    div.article-content {
+        font-size: 0.9rem !important;
+    }
+    .article-content h1 {
+        font-size: 1.875rem;
+    }
+    .article-content h2 {
+        font-size: 1.5rem;
+    }
+    .article-content h3 {
+        font-size: 1.25rem;
+    }
+    .article-content blockquote {
+        margin: 1.5rem 0;
+        padding: 1rem 1.5rem;
+    }
+    .article-content ul,
+    .article-content ol {
+        padding-left: 1.5rem;
+    }
+    .article-content table {
+        font-size: 0.8rem;
+    }
+    .article-content table th,
+    .article-content table td {
+        padding: 0.75rem 0.5rem;
+    }
+}
+
+
+/* Accessibilité */
+
+@media (prefers-reduced-motion: reduce) {
+    .article-content * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+
+/* Mode sombre (optionnel) */
+
+@media (prefers-color-scheme: dark) {
+    .article-content {
+        color: #e5e7eb;
+    }
+    .article-content h1,
+    .article-content h2,
+    .article-content h3,
+    .article-content h4,
+    .article-content h5,
+    .article-content h6 {
+        color: #f3f4f6;
+    }
+    .article-content blockquote {
+        background: linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+        color: #d1d5db;
+    }
+}

@@ -1,0 +1,320 @@
+/* Styles CSS avancés pour les services IRI */
+
+/* Animations et transitions fluides */
+@keyframes iri-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(30, 71, 47, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(30, 71, 47, 0.5);
+    }
+}
+
+@keyframes iri-shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes iri-float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Classes utilitaires pour les effets IRI */
+.iri-glow {
+    animation: iri-glow 3s ease-in-out infinite;
+}
+
+.iri-shimmer {
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(184, 134, 11, 0.3) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: iri-shimmer 2s infinite;
+}
+
+.iri-float {
+    animation: iri-float 3s ease-in-out infinite;
+}
+
+/* Effets de hover avancés */
+.iri-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.iri-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(30, 71, 47, 0.1),
+        transparent
+    );
+    transition: left 0.6s ease;
+}
+
+.iri-card:hover::before {
+    left: 100%;
+}
+
+.iri-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(30, 71, 47, 0.15);
+}
+
+/* Boutons IRI stylisés */
+.iri-btn-primary {
+    background: linear-gradient(135deg, #1e472f 0%, #2d5a3f 100%);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.iri-btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(184, 134, 11, 0.3),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.iri-btn-primary:hover::before {
+    left: 100%;
+}
+
+.iri-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(30, 71, 47, 0.4);
+}
+
+/* Inputs avec focus IRI */
+.iri-input {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.iri-input:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 3px rgba(30, 71, 47, 0.1);
+}
+
+/* Badges IRI */
+.iri-badge {
+    position: relative;
+    overflow: hidden;
+}
+
+.iri-badge::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.iri-badge:hover::after {
+    transform: translateX(100%);
+}
+
+/* Stats cards avec effet de pulsation */
+.iri-stats-card {
+    transition: all 0.3s ease;
+}
+
+.iri-stats-card:hover {
+    transform: scale(1.05);
+}
+
+.iri-stats-card:hover .iri-stats-icon {
+    animation: iri-float 2s ease-in-out infinite;
+}
+
+/* Effets de focus améliorés */
+.iri-focus:focus {
+    outline: none;
+    box-shadow: 
+        0 0 0 2px rgba(30, 71, 47, 0.2),
+        0 0 20px rgba(30, 71, 47, 0.3);
+    transform: scale(1.01);
+}
+
+/* Tooltips IRI */
+.iri-tooltip {
+    position: relative;
+}
+
+.iri-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(30, 71, 47, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.iri-tooltip:hover::after {
+    opacity: 1;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+    .iri-card:hover {
+        transform: translateY(-2px) scale(1.01);
+    }
+    
+    .iri-btn-primary:hover {
+        transform: translateY(-1px);
+    }
+}
+
+/* Styles pour la médiathèque moderne */
+.media-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.media-card:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+
+.media-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+}
+
+.glass-morphism {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.search-input:focus {
+    box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.1);
+}
+
+/* Animation pour les boutons de vue */
+.view-toggle-btn {
+    transition: all 0.2s ease;
+}
+
+.view-toggle-btn.active {
+    background: linear-gradient(135deg, #1e472f, #2d5a3f);
+}
+
+/* Effet de loading pour les images */
+.media-loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading-shimmer 2s infinite;
+}
+
+@keyframes loading-shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Styles pour le modal moderne */
+.modal-backdrop {
+    backdrop-filter: blur(8px);
+}
+
+.modal-container {
+    animation: modal-appear 0.3s ease-out;
+}
+
+@keyframes modal-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Amélioration des boutons d'action */
+.action-btn {
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.action-btn:hover::before {
+    width: 200px;
+    height: 200px;
+}
+
+/* Troncature de texte élégante */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Badge type de média */
+.media-type-badge {
+    backdrop-filter: blur(4px);
+    background: rgba(210, 105, 30, 0.9);
+}

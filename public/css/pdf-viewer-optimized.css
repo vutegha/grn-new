@@ -1,0 +1,272 @@
+/**
+ * PDF Viewer Optimized Styles
+ * Separated from Blade template for better maintainability
+ */
+
+/* PDF Container Animations and Transitions */
+.pdf-page-container {
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.pdf-page-container[data-load-status="loading"] {
+    opacity: 0.7;
+}
+
+.pdf-page-container[data-load-status="loaded"] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pdf-page-loaded {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* PDF Page Wrapper */
+.pdf-page-wrapper {
+    margin-bottom: 2rem;
+    background: #ffffff;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.pdf-page-wrapper:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
+}
+
+/* PDF Page Header */
+.pdf-page-header {
+    margin-bottom: 1rem;
+}
+
+.pdf-page-header span {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    border: 1px solid #d1d5db;
+}
+
+/* Canvas Optimization */
+.pdf-page-wrapper canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* Loading Placeholder */
+.pdf-loading-placeholder {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 0.5rem;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Error State */
+.pdf-error-state {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+}
+
+.pdf-error-state svg {
+    color: #f87171;
+}
+
+/* Vertical Navigation Optimizations */
+#verticalFloatingNav {
+    min-width: 120px;
+    max-width: 130px;
+    background: rgba(248, 249, 250, 0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid #d1d5db;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+#verticalFloatingNav button {
+    transition: all 0.15s ease;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid #d1d5db;
+    background: #f9fafb;
+    color: #374151;
+    border-radius: 0.375rem;
+    margin: 2px;
+}
+
+#verticalFloatingNav button:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#verticalFloatingNav button:active {
+    background: #e5e7eb;
+    transform: translateY(0);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#verticalPageInput, #verticalSearchInput {
+    font-size: 11px;
+    font-family: inherit;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    color: #374151;
+    border-radius: 0.375rem;
+    transition: all 0.15s ease;
+}
+
+#verticalPageInput:focus, #verticalSearchInput:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background: #ffffff;
+}
+
+/* Navigation Sections */
+#verticalFloatingNav .nav-section {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    margin: 4px;
+    padding: 8px;
+}
+
+/* Separators */
+#verticalFloatingNav .nav-separator {
+    border-top: 1px solid #e5e7eb;
+    margin: 8px 4px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d1d5db, transparent);
+}
+
+/* Text Styles */
+#verticalFloatingNav .text-muted {
+    color: #6b7280;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+#verticalFloatingNav .text-primary {
+    color: #374151;
+    font-weight: 500;
+}
+
+#verticalFloatingNav .text-heading {
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    #verticalFloatingNav {
+        right: 0.5rem !important;
+        min-width: 100px;
+        max-width: 110px;
+        font-size: 10px;
+    }
+    
+    #verticalFloatingNav button {
+        padding: 0.25rem 0.5rem !important;
+        font-size: 10px !important;
+        margin: 1px;
+    }
+    
+    #verticalPageInput, #verticalSearchInput {
+        font-size: 10px !important;
+        padding: 0.125rem 0.25rem !important;
+    }
+    
+    .pdf-page-wrapper {
+        margin-bottom: 1rem;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #verticalFloatingNav {
+        min-width: 90px;
+        max-width: 95px;
+    }
+    
+    .pdf-page-wrapper {
+        padding: 0.75rem;
+    }
+}
+
+/* High DPI Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .pdf-page-wrapper canvas {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Print Styles */
+@media print {
+    #verticalFloatingNav {
+        display: none !important;
+    }
+    
+    .pdf-page-wrapper {
+        box-shadow: none;
+        border: none;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* Performance Optimization Classes */
+.pdf-container {
+    contain: layout style paint;
+    will-change: scroll-position;
+}
+
+.pdf-page-container {
+    contain: layout style paint;
+}
+
+.pdf-viewport-optimized {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}

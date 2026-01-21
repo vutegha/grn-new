@@ -1,0 +1,273 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS variables can be defined in :root or a selector if needed */
+
+:root {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+.modal-bg {
+    display: none;
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-bg.active {
+    display: flex;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 0.5rem;
+    max-width: 600px;
+    width: 90vw;
+    padding: 2rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+
+/* Ajout de classes personnalisées anciennement Notus/Creative Tim */
+
+.ease-soft-in-out {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shadow-blur {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.fill-white {
+    fill: white;
+}
+
+@media (min-width: 640px) {
+    #dropdownMenu a {
+        min-width: 352px;
+        /* plus petit pour les petits écrans */
+    }
+}
+
+@media (min-width: 1024px) {
+    #dropdownMenu a {
+        min-width: 352px;
+        /* deux fois plus large que le parent */
+    }
+}
+
+#dropdownMenu::-webkit-scrollbar {
+    height: 6px;
+}
+
+#dropdownMenu::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.btn-ci {
+    background-color: #ee6751;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-ci:hover {
+    background-color: white;
+    color: #ee6751;
+    border: 1px solid #ee6751;
+}
+
+.ci-color {
+    color: #ee6751;
+}
+
+
+/* PDF Viewer Styles */
+
+#pdfViewer canvas {
+    display: block;
+    margin: 0 auto;
+    width: 100% !important;
+    height: auto !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.highlighted {
+    background-color: rgba(255, 255, 0, 0.4) !important;
+    color: inherit !important;
+    padding: 1px 2px;
+    border-radius: 2px;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-clamp: 2;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-clamp: 3;
+}
+
+.prose {
+    color: #374151;
+    max-width: none;
+}
+
+.prose p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+    color: #111827;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+
+/* Search Highlight Styles */
+
+.search-highlight-overlay {
+    pointer-events: none;
+    z-index: 10;
+}
+
+.search-highlight-rect {
+    background-color: rgba(255, 255, 0, 0.35);
+    border: 1px solid rgba(255, 193, 7, 0.8);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+}
+
+.search-highlight-rect:hover {
+    background-color: rgba(255, 255, 0, 0.5);
+    box-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+}
+
+.current-match-highlight {
+    background-color: rgba(255, 0, 0, 0.4) !important;
+    border: 2px solid rgba(220, 38, 127, 0.9) !important;
+    box-shadow: 0 0 12px rgba(220, 38, 127, 0.6) !important;
+    z-index: 15 !important;
+    animation: pulse-highlight 2s ease-in-out;
+}
+
+@keyframes pulse-highlight {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+.pdf-page-container {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.pdf-page-container.has-matches {
+    background-color: rgba(255, 255, 0, 0.05);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+
+/* Floating Navigation Styles */
+
+#floatingNav {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 70px;
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 9999 !important;
+}
+
+#floatingNav.show {
+    transform: translateY(0) !important;
+    opacity: 1;
+    visibility: visible;
+}
+
+#floatingNav.hide {
+    transform: translateY(-100%) !important;
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+/* Add padding to body when floating nav is visible to prevent content overlap */
+
+body.floating-nav-visible {
+    padding-top: 80px;
+    transition: padding-top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* Remove padding smoothly when nav is hidden */
+
+body:not(.floating-nav-visible) {
+    padding-top: 0;
+    transition: padding-top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* Smooth transitions for floating nav elements */
+
+#floatingNav button {
+    transition: all 0.2s ease;
+}
+
+#floatingNav button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Prevent scroll jittering */
+
+html {
+    scroll-behavior: smooth;
+}

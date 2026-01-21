@@ -1,0 +1,286 @@
+/* Publication Show Page Styles */
+
+
+/* Floating Navigation */
+
+#floatingNav {
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(-100%);
+}
+
+#floatingNav.show {
+    transform: translateY(0);
+}
+
+#floatingNav.hide {
+    transform: translateY(-100%);
+}
+
+
+/* PDF Viewer Styles */
+
+.pdf-page-container {
+    position: relative;
+    margin-bottom: 1rem;
+    transition: border 0.3s ease;
+}
+
+.pdf-page-container canvas {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+}
+
+
+/* Search Highlights */
+
+.search-highlight-overlay {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.search-highlight-rect {
+    position: absolute;
+    background-color: rgba(255, 255, 0, 0.3);
+    border: 1px solid rgba(255, 193, 7, 0.8);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.current-match-highlight {
+    background-color: rgba(255, 0, 0, 0.4) !important;
+    border: 2px solid rgba(220, 38, 127, 0.9) !important;
+    box-shadow: 0 0 10px rgba(220, 38, 127, 0.5);
+    z-index: 15;
+}
+
+
+/* PDF Controls */
+
+.pdf-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.pdf-controls button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background-color: white;
+    color: #374151;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.pdf-controls button:hover:not(:disabled) {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.pdf-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pdf-controls input[type="number"] {
+    width: 4rem;
+    padding: 0.375rem 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+
+/* Progress Bar */
+
+.pdf-progress-container {
+    width: 100%;
+    background-color: #e5e7eb;
+    border-radius: 9999px;
+    height: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.pdf-progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, #3b82f6, #1d4ed8);
+    border-radius: 9999px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+
+/* Loading States */
+
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+
+/* Modal Toast */
+
+#resumeToast {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#resumeToast.hidden {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .pdf-controls {
+        justify-content: center;
+    }
+    #floatingNav .pdf-controls {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .pdf-controls input[type="number"] {
+        width: 3rem;
+    }
+}
+
+
+/* Print Styles */
+
+@media print {
+    #floatingNav,
+    .pdf-controls,
+    #resumeToast {
+        display: none !important;
+    }
+    .pdf-page-container {
+        page-break-inside: avoid;
+        margin-bottom: 0;
+    }
+}
+
+
+/* High Contrast Mode */
+
+@media (prefers-contrast: high) {
+    .search-highlight-rect {
+        background-color: rgba(255, 255, 0, 0.8);
+        border: 2px solid #000;
+    }
+    .current-match-highlight {
+        background-color: rgba(255, 0, 0, 0.8) !important;
+        border: 3px solid #000 !important;
+    }
+}
+
+
+/* Reduced Motion */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* =================================================================
+   AMÉLIORATIONS APPLIQUÉES - RECOMMANDATIONS AUDIT
+   ================================================================= */
+
+
+/* Resume Toast specific styles with proper max-height */
+
+#resumeToast {
+    max-height: 70vh !important;
+    transition: all 0.3s ease-in-out;
+    overflow-y: auto;
+}
+
+
+/* Remove inline styles support */
+
+.modal-max-height {
+    max-height: 70vh !important;
+}
+
+
+/* Enhanced accessibility focus states */
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+
+/* High contrast mode support */
+
+@media (prefers-contrast: high) {
+    .bg-white\/20 {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+    }
+    .text-white\/70 {
+        color: rgba(255, 255, 255, 0.95) !important;
+    }
+}
+
+
+/* Print optimization */
+
+@media print {
+    #resumeToast,
+    .floating-action-btn,
+    .pdf-controls,
+    #floatingNav {
+        display: none !important;
+    }
+    .bg-gradient-to-br {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+}
+
+
+/* Performance optimizations */
+
+.floating-action-btn,
+#resumeToast,
+.pdf-controls {
+    will-change: transform;
+}
+
+
+/* Dark mode support */
+
+@media (prefers-color-scheme: dark) {
+    #resumeToast {
+        background: rgba(31, 41, 55, 0.95);
+        border-color: rgba(75, 85, 99, 0.5);
+    }
+}
+
+
+/* PDF Progress Bar initial state */
+
+.pdf-progress-bar-initial {
+    width: 0%;
+}

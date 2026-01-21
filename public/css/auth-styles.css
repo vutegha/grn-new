@@ -1,0 +1,392 @@
+/* Styles d'authentification modernes pour GRN-UCBC */
+
+:root {
+    --iri-primary: #1e472f;
+    --iri-secondary: #2d5a3f;
+    --iri-accent: #d2691e;
+    --iri-light: #f0f9f4;
+    --iri-gold: #b8860b;
+    --iri-gray: #64748b;
+    --iri-dark: #1a1a1a;
+}
+
+/* Arrière-plan avec gradient et motif */
+.auth-bg {
+    background: linear-gradient(135deg, #f0f9f4 0%, #ffffff 50%, #f0f9f4 100%);
+    position: relative;
+    min-height: 100vh;
+}
+
+.auth-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%231e472f" opacity="0.1"/><circle cx="80" cy="40" r="3" fill="%23d2691e" opacity="0.1"/><circle cx="40" cy="70" r="2" fill="%232d5a3f" opacity="0.1"/><circle cx="70" cy="15" r="1.5" fill="%23b8860b" opacity="0.1"/><circle cx="15" cy="60" r="2.5" fill="%231e472f" opacity="0.1"/><circle cx="90" cy="80" r="2" fill="%23d2691e" opacity="0.1"/></svg>') repeat;
+    z-index: 0;
+}
+
+/* Carte glassmorphisme */
+.glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border-radius: 24px;
+}
+
+/* Groupes d'input */
+.input-group {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--iri-gray);
+    z-index: 10;
+}
+
+.floating-label {
+    position: absolute;
+    left: 48px;
+    top: 16px;
+    color: var(--iri-gray);
+    font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Champs de formulaire */
+.form-input {
+    padding-left: 48px;
+    padding-right: 16px;
+    padding-top: 20px;
+    padding-bottom: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    outline: none;
+}
+
+.form-input:focus,
+.form-input:not(:placeholder-shown) {
+    border-color: var(--iri-primary);
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 3px rgba(30, 71, 47, 0.1);
+}
+
+.form-input:focus + .floating-label,
+.form-input:not(:placeholder-shown) + .floating-label {
+    top: 4px;
+    font-size: 12px;
+    color: var(--iri-primary);
+    font-weight: 600;
+}
+
+.form-input:read-only {
+    background: rgba(243, 244, 246, 0.8);
+    border-color: #d1d5db;
+    color: var(--iri-gray);
+}
+
+.form-input.error {
+    border-color: #ef4444 !important;
+}
+
+/* Boutons */
+.btn-primary {
+    background: linear-gradient(135deg, var(--iri-primary) 0%, var(--iri-secondary) 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 16px 32px;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px -12px rgba(30, 71, 47, 0.4);
+}
+
+/* Séparateur */
+.divider {
+    position: relative;
+    text-align: center;
+    margin: 32px 0;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--iri-light), transparent);
+}
+
+.divider span {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0 20px;
+    color: var(--iri-gray);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Container logo */
+.logo-container {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(30, 71, 47, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Texte de bienvenue */
+.welcome-text {
+    background: linear-gradient(135deg, var(--iri-primary), var(--iri-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Messages d'erreur et de succès */
+.error-message {
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+    border: 1px solid #fca5a5;
+    color: #dc2626;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.success-message {
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    border: 1px solid #86efac;
+    color: #16a34a;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Cercle d'icône */
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--iri-primary), var(--iri-accent));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px -5px rgba(30, 71, 47, 0.3);
+}
+
+/* Layout à deux colonnes */
+.two-column-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+}
+
+/* Container d'image */
+.image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(30, 71, 47, 0.1) 0%, rgba(210, 105, 30, 0.1) 100%);
+    z-index: 1;
+}
+
+.auth-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(1.1) contrast(1.05);
+    transition: transform 0.3s ease;
+}
+
+.auth-image:hover {
+    transform: scale(1.02);
+}
+
+/* Checkbox personnalisée */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.custom-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-checkbox:checked {
+    background: var(--iri-primary);
+    border-color: var(--iri-primary);
+}
+
+.custom-checkbox:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .two-column-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-width: 500px;
+    }
+    
+    .image-container {
+        order: -1;
+        height: 300px;
+    }
+}
+
+@media (max-width: 640px) {
+    .glass-card {
+        margin: 1rem;
+    }
+    
+    .form-input {
+        padding-top: 16px;
+        padding-bottom: 6px;
+    }
+    
+    .image-container {
+        height: 250px;
+    }
+    
+    .two-column-layout {
+        gap: 1.5rem;
+    }
+}
+
+/* Liens et navigation */
+.auth-link {
+    color: var(--iri-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.auth-link:hover {
+    color: var(--iri-accent);
+}
+
+.secondary-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 24px;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    text-decoration: none;
+    color: #6b7280;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.secondary-btn:hover {
+    border-color: var(--iri-primary);
+    color: var(--iri-primary);
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+.auth-footer {
+    text-align: center;
+    font-size: 14px;
+    color: var(--iri-gray);
+    margin-top: 2rem;
+}
+
+.auth-footer a {
+    color: var(--iri-gray);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.auth-footer a:hover {
+    color: var(--iri-primary);
+}

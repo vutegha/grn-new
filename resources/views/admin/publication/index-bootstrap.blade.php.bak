@@ -1,0 +1,273 @@
+@extends('layouts.admin')
+
+@section('title', 'Publications')
+
+@section('content')
+<div class="container-fluid py-4">
+    {{-- Header avec titre et bouton d'ajout --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">
+                <i class="bi bi-journal-text me-2"></i>Publications
+            </h1>
+            <p class="text-muted mb-0">Gérez vos articles et publications</p>
+        </div>
+        <a href="{{ route('admin.publication.create') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-1"></i>Nouvelle publication
+        </a>
+    </div>
+
+    {{-- Statistiques --}}
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Publications</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $publications->total() }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-journal-text fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">À la Une</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $publications->where('a_la_une', true)->count() }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-star fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">En Vedette</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $publications->where('en_vedette', true)->count() }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-gem fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Avec Thumbnail</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $publications->whereNotNull('thundernail')->count() }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-image fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Filtres --}}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="bi bi-funnel me-2"></i>Filtres
+            </h6>
+        </div>
+        <div class="card-body">
+            <form method="GET" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Auteur</label>
+                    <select name="auteur" class="form-select">
+                        <option value="">-- Tous --</option>
+                        @foreach ($auteurs as $auteur)
+                            <option value="{{ $auteur->id }}" {{ request('auteur') == $auteur->id ? 'selected' : '' }}>
+                                {{ $auteur->nom }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Catégorie</label>
+                    <select name="categorie" class="form-select">
+                        <option value="">-- Toutes --</option>
+                        @foreach ($categories as $cat)
+                            <option value="{{ $cat->id }}" {{ request('categorie') == $cat->id ? 'selected' : '' }}>
+                                {{ $cat->nom }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-outline-primary w-100">
+                        <i class="bi bi-search me-1"></i>Filtrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {{-- Table des publications --}}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <i class="bi bi-table me-2"></i>Liste des Publications
+            </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Thumbnail</th>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Auteur(s)</th>
+                            <th scope="col">Catégorie</th>
+                            <th scope="col">Statut</th>
+                            <th scope="col" class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($publications as $pub)
+                            <tr>
+                                <td>
+                                    @if($pub->thundernail)
+                                        <img src="{{ asset('storage/' . $pub->thundernail) }}" 
+                                             class="rounded" 
+                                             style="width: 60px; height: 60px; object-fit: cover;" 
+                                             alt="Thumbnail publication">
+                                    @else
+                                        <div class="bg-light rounded d-flex align-items-center justify-content-center" 
+                                             style="width: 60px; height: 60px;">
+                                            <i class="bi bi-image text-muted"></i>
+                                        </div>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="fw-bold">{{ $pub->titre }}</div>
+                                    @if($pub->description)
+                                        <small class="text-muted">{{ Str::limit($pub->description, 80) }}</small>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($pub->auteurs && $pub->auteurs->count() > 0)
+                                        <div class="d-flex flex-column gap-1">
+                                            @foreach($pub->auteurs->take(2) as $auteur)
+                                                <div class="d-flex align-items-center">
+                                                    @if ($auteur->photo)
+                                                        <img src="{{ asset('storage/' . $auteur->photo) }}" 
+                                                             alt="Photo de {{ $auteur->nom }}"
+                                                             class="rounded-circle me-2" 
+                                                             style="width: 24px; height: 24px; object-fit: cover;">
+                                                    @else
+                                                        <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center me-2 text-white" 
+                                                             style="width: 24px; height: 24px; font-size: 10px;">
+                                                            {{ strtoupper(substr($auteur->nom, 0, 1)) }}
+                                                        </div>
+                                                    @endif
+                                                    <small>{{ $auteur->nom }}</small>
+                                                </div>
+                                            @endforeach
+                                            @if($pub->auteurs->count() > 2)
+                                                <small class="text-muted">
+                                                    +{{ $pub->auteurs->count() - 2 }} autre(s)
+                                                </small>
+                                            @endif
+                                        </div>
+                                    @else
+                                        <span class="text-muted"><em>Aucun auteur</em></span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($pub->categorie)
+                                        <span class="badge bg-outline-secondary">{{ $pub->categorie->nom }}</span>
+                                    @else
+                                        <span class="text-muted">—</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-column gap-1">
+                                        @if($pub->a_la_une)
+                                            <span class="badge bg-success">À la une</span>
+                                        @endif
+                                        @if($pub->en_vedette)
+                                            <span class="badge bg-info">En vedette</span>
+                                        @endif
+                                        @if(!$pub->a_la_une && !$pub->en_vedette)
+                                            <span class="badge bg-secondary">Standard</span>
+                                        @endif
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <a href="{{ route('admin.publication.show', $pub) }}" 
+                                           class="btn btn-sm btn-outline-info" 
+                                           title="Voir">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <a href="{{ route('admin.publication.edit', $pub) }}" 
+                                           class="btn btn-sm btn-outline-primary" 
+                                           title="Modifier">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <form action="{{ route('admin.publication.destroy', $pub) }}" 
+                                              method="POST" 
+                                              class="d-inline" 
+                                              onsubmit="return confirm('Confirmer la suppression ?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" 
+                                                    class="btn btn-sm btn-outline-danger" 
+                                                    title="Supprimer">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center py-4">
+                                    <div class="text-muted">
+                                        <i class="bi bi-journal-x fa-3x mb-3 d-block"></i>
+                                        <p>Aucune publication trouvée.</p>
+                                        <a href="{{ route('admin.publication.create') }}" class="btn btn-primary">
+                                            <i class="bi bi-plus-circle me-1"></i>Créer la première publication
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {{-- Pagination --}}
+    @if($publications->hasPages())
+        <div class="d-flex justify-content-center">
+            {{ $publications->links() }}
+        </div>
+    @endif
+</div>
+@endsection

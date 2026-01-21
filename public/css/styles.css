@@ -1,0 +1,554 @@
+/* Styles personnalisés pour IRI-UCBC */
+
+html {
+    scroll-behavior: smooth;
+}
+
+#aboutus {
+    scroll-margin-top: 80px; /* adapte selon la hauteur de ta navbar */
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.hero-section {
+    height: 60vh;
+    background: linear-gradient(to right, #0d6efd, #0a58ca);
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Scrollbar utilities */
+.no-scrollbar::-webkit-scrollbar { 
+    display: none; 
+}
+
+.no-scrollbar { 
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+
+.scrollbar-hide::-webkit-scrollbar { 
+    display: none; 
+}
+
+.scrollbar-hide { 
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+
+/* Styles IRI pour Mission & Secteurs */
+.mission-badge {
+    background: linear-gradient(135deg, var(--iri-primary), var(--iri-accent));
+}
+
+.mission-title-gradient {
+    background: linear-gradient(135deg, var(--iri-primary), var(--iri-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Design moderne pour la section Mission */
+.mission-card-bg {
+    background: linear-gradient(135deg, var(--iri-primary)/20, var(--iri-secondary)/20);
+}
+
+.mission-icon-bg {
+    background: linear-gradient(135deg, var(--iri-primary), var(--iri-secondary));
+}
+
+.accent-dot {
+    background: linear-gradient(135deg, var(--iri-accent), var(--iri-gold));
+}
+
+.primary-text {
+    color: var(--iri-primary);
+}
+
+.service-header-bg {
+    background: linear-gradient(135deg, var(--iri-primary)/95, var(--iri-secondary)/95);
+}
+
+.service-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Hover effects pour les service cards */
+.service-border {
+    border-color: transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--iri-accent)/30, var(--iri-gold)/30) border-box;
+}
+
+.service-cta {
+    transition: all 0.3s ease;
+}
+
+.group:hover .service-cta {
+    background: linear-gradient(135deg, var(--iri-accent), var(--iri-gold));
+    color: white;
+    transform: translateX(4px);
+}
+
+.service-hover-overlay {
+    background: linear-gradient(135deg, var(--iri-accent)/5, var(--iri-gold)/5);
+}
+
+/* Animation pour les backgrounds */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.floating-bg {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Font Poppins fallback */
+.font-poppins {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+}
+}
+
+.mission-card-bg {
+    background: linear-gradient(135deg, var(--iri-primary), var(--iri-accent));
+}
+
+.mission-icon-bg {
+    background: linear-gradient(135deg, var(--iri-primary), var(--iri-accent));
+}
+
+.service-header-bg {
+    background: linear-gradient(135deg, var(--iri-primary), var(--iri-accent));
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.service-header-bg h4 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+}
+
+.service-border {
+    border-color: #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+.service-border:hover {
+    border-color: var(--iri-accent);
+    box-shadow: 0 4px 20px rgba(210, 105, 30, 0.15);
+}
+
+.service-hover-overlay {
+    background: linear-gradient(135deg, var(--iri-primary), var(--iri-accent));
+    opacity: 0.05;
+}
+
+.accent-dot {
+    background-color: var(--iri-accent);
+}
+
+.primary-text {
+    color: var(--iri-primary);
+}
+
+.service-cta {
+    background: linear-gradient(135deg, var(--iri-accent), var(--iri-primary));
+    color: white !important;
+}
+
+.service-cta:hover {
+    background: linear-gradient(135deg, var(--iri-primary), var(--iri-accent));
+    transform: translateY(-2px);
+}
+
+/* Animation pour les partenaires */
+@keyframes scroll-infinite {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-scroll-infinite {
+    animation: scroll-infinite 30s linear infinite;
+}
+
+.animate-scroll-infinite:hover {
+    animation-play-state: paused;
+}
+
+
+/* Start of modal styles for sector of intervention */
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004a9f;
+}
+  .modal-bg {
+                                        display: none;
+                                        position: fixed;
+                                        z-index: 50;
+                                        left: 0; top: 0; width: 100vw; height: 100vh;
+                                        background: rgba(0,0,0,0.5);
+                                        align-items: center; justify-content: center;
+                                }
+                                .modal-bg.active { display: flex; }
+                                .modal-content {
+                                        background: #fff;
+                                        border-radius: 0.5rem;
+                                        max-width: 600px;
+                                        width: 90vw;
+                                        padding: 2rem;
+                                        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                                        position: relative;
+                                }
+                                .modal-close {
+                                        position: absolute;
+                                        top: 1rem; right: 1rem;
+                                        background: none;
+                                        border: none;
+                                        font-size: 1.5rem;
+                                        cursor: pointer;
+                                }
+
+                @media (max-width: 640px) {
+                    .motto h1 { font-size: 1.5rem !important; }
+                }
+                @media (min-width: 641px) and (max-width: 768px) {
+                    .motto h1 { font-size: 2rem !important; }
+                }
+                @media (min-width: 769px) and (max-width: 1024px) {
+                    .motto h1 { font-size: 2.5rem !important; }
+                }
+                @media (min-width: 1025px) {
+                    .motto h1 { font-size: 3rem !important; }
+                }
+
+
+#pdfViewer:fullscreen {
+  height: 100vh;
+  overflow-y: auto;
+  background: white;
+  padding: 1rem;
+}
+#pdfLoader {
+    animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+ 
+ /* End  of modal styles for sector of intervention */
+
+ .btn-ci {
+  background-color: #ee6751;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-ci:hover {
+  background-color: white;
+  color: #ee6751;
+  border: 1px solid #ee6751;
+}
+
+.ci-color {
+   background-color: #ee6751;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+:root {
+  --olive: #505c10;
+  --light-green: #dde3da;
+  --light-gray: #f6f6f1;
+  --coral: #ee6751;
+  --beige: #f1ebe3;
+  --grayish: #eeeeee;
+  --vert-ucbc: #087515a6;
+  
+  /* Couleurs IRI Charte Graphique */
+  --iri-primary: #1e472f;      /* Vert foncé principal */
+  --iri-secondary: #2d5a3f;    /* Vert moyen */
+  --iri-accent: #d2691e;       /* Orange/rouge accent */
+  --iri-light: #f0f9f4;        /* Vert très clair */
+  --iri-gold: #b8860b;         /* Or pour les détails */
+  --iri-gray: #64748b;         /* Gris moderne */
+  --iri-dark: #1a1a1a;         /* Noir moderne */
+}
+
+/* ============================================
+   TEXT COLORS
+============================================ */
+.text-olive { color: var(--olive); }
+.text-light-green { color: var(--light-green); }
+.text-light-gray { color: var(--light-gray); }
+.text-coral { color: var(--coral); }
+.text-beige { color: var(--beige); }
+.text-grayish { color: var(--grayish); }
+
+/* Couleurs IRI */
+.text-iri-primary { color: var(--iri-primary); }
+.text-iri-secondary { color: var(--iri-secondary); }
+.text-iri-accent { color: var(--iri-accent); }
+.text-iri-gold { color: var(--iri-gold); }
+.text-iri-gray { color: var(--iri-gray); }
+.text-iri-dark { color: var(--iri-dark); }
+
+/* ============================================
+   BACKGROUND COLORS
+============================================ */
+.bg-olive { background-color: var(--olive); color: var(--light-gray); }
+.bg-light-green { background-color: var(--light-green); color: var(--olive); }
+.bg-light-gray { background-color: var(--light-gray); color: var(--olive); }
+.bg-coral { background-color: var(--coral); color: var(--light-gray); }
+.bg-beige { background-color: var(--beige); color: var(--olive); }
+.bg-grayish { background-color: var(--grayish); color: var(--olive); }
+.bg-vert-ucbc{ background-color: var (--vert-ucbc); color: var(--olive); }
+
+/* Arrière-plans IRI */
+.bg-iri-primary { background-color: var(--iri-primary); color: white; }
+.bg-iri-secondary { background-color: var(--iri-secondary); color: white; }
+.bg-iri-accent { background-color: var(--iri-accent); color: white; }
+.bg-iri-light { background-color: var(--iri-light); color: var(--iri-primary); }
+.bg-iri-gold { background-color: var(--iri-gold); color: white; }
+.bg-iri-gray { background-color: var(--iri-gray); color: white; }
+
+/* Pour ajouter du padding et des coins arrondis */
+.bg-block {
+  padding: 2em;
+  border-radius: 8px;
+}
+
+/* ============================================
+   LINKS AVEC CONTRASTE SÛR
+============================================ */
+
+/* Lien clair sur fond sombre */
+a.link-light {
+  color: var(--light-gray);
+  text-decoration: none;
+}
+a.link-light:hover {
+  color: var(--coral);
+}
+
+/* Lien sombre sur fond clair */
+a.link-dark {
+  color: var(--olive);
+  text-decoration: none;
+}
+a.link-dark:hover {
+  color: var(--coral);
+}
+
+/* Exemple pour link-coral si tu veux le garder */
+a.link-coral {
+  color: var(--coral);
+  text-decoration: none;
+}
+a.link-coral:hover {
+  color: var(--olive); /* assure toujours contraste */
+}
+
+
+/* Bouton olive */
+.btn-olive {
+  background-color: var(--olive);
+  color: var(--light-gray);
+  border: 2px solid var(--olive);
+}
+.btn-olive:hover {
+  background-color: var(--coral); /* hover toujours contrasté */
+  color: var(--light-gray);
+}
+
+/* bouton iri */
+.btn-iri {
+  background-color: var(--olive);
+  color: var(--light-gray);
+  border: 2px solid var(--olive);
+  padding: 0.5em 1.2em;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-iri:hover {
+  background-color: var(--coral);
+  border-color: var(--coral);
+  color: var(--light-gray);
+}
+
+/* Bouton coral */
+.btn-coral {
+  background-color: var(--coral);
+  color: var(--light-gray);
+  border: 2px solid var(--coral);
+}
+.btn-coral:hover {
+  background-color: var(--olive);
+  color: var(--light-gray);
+}
+
+/* Bouton light green */
+.btn-light-green {
+  background-color: var(--light-green);
+  color: var(--olive);
+  border: 2px solid var(--light-green);
+}
+.btn-light-green:hover {
+  background-color: var(--coral);
+  color: var(--light-gray);
+}
+
+/* Bouton beige */
+.btn-beige {
+  background-color: var(--olive);
+  color: var(--light-gray);
+  border: 2px solid var(--olive); /* bordure olive dès le départ */
+  padding: 0.5em 1.2em;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-beige:hover {
+  background-color: var(--beige);
+  color: var(--olive);
+  border-color: var(--olive); /* reste olive même au hover */
+}
+
+/* Base commune pour tous les boutons */
+.btn-olive, .btn-coral, .btn-light-green, .btn-beige {
+  padding: 0.5em 1.2em;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  border-color: var(--light-gray);;
+}
+
+
+/* ============================================
+   SPECIAL BLOCKS
+============================================ */
+
+/* Highlight coral avec texte clair */
+.highlight {
+  background-color: var(--coral);
+  color: var(--light-gray);
+  padding: 1em;
+  border-radius: 8px;
+}
+
+/* ============================================
+   UTILITY FOR DARK / LIGHT SECTIONS
+============================================ */
+.bg-dark {
+  background-color: var(--olive);
+  color: var(--light-gray);
+  padding: 2em;
+}
+
+.bg-light {
+  background-color: var(--light-gray);
+  color: var(--olive);
+  padding: 2em;
+}
+
+
+.footer {
+  background-color: #505c10;
+  color: #dde3da;
+  padding: 3rem 1.5rem;
+}
+
+.footer a {
+  color: #dde3da;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  color: #ee6751; /* léger hover corail */
+}
+
+.footer h4, .footer h2, .footer h3 {
+  color: #dde3da;
+}
+
+.footer input[type="email"] {
+  background-color: #dde3da;
+  color: #505c10;
+  border: 2px solid #dde3da;
+  padding: 0.5rem;
+  border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.footer button {
+  background-color: #dde3da;
+  color: #505c10;
+  border: 2px solid #dde3da;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0.25rem 0.25rem 0;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.footer button:hover {
+  background-color: #ee6751;
+  border-color: #ee6751;
+  color: #f6f6f1;
+}
+.dropdown-menu {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    min-width: 220px;
+    z-index: 1055; /* plus haut que backdrop */
+}
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@keyframes scroll-infinite {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll-infinite {
+  display: flex;
+  animation: scroll-infinite 30s linear infinite;
+  width: fit-content;
+}
+.animate-scroll-infinite:hover {
+  animation-play-state: paused;
+}

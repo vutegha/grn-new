@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démonstration Composant WordPress Content</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm mb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <h1 class="text-2xl font-bold text-gray-900">
+                <i class="fas fa-wordpress text-blue-600 mr-2"></i>
+                Démonstration Composant WordPress Content
+            </h1>
+        </div>
+    </nav>
+
+    <!-- Wrapper principal -->
+    <div class="wordpress-content-wrapper max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="wp-content prose prose-lg max-w-none">
+            
+            <!-- Exemple de contenu WordPress -->
+            <p>Ceci est le premier paragraphe avec une taille légèrement plus grande pour créer un effet de magazine. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+            <h2>Titre de niveau 2</h2>
+            
+            <p>Voici un paragraphe normal. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+
+            <p>Un autre paragraphe avec du <strong>texte en gras</strong>, <em>du texte en italique</em>, et du <u>texte souligné</u>. Vous pouvez également avoir <a href="#">des liens cliquables</a> avec un style hover élégant.</p>
+
+            <h3>Listes à puces</h3>
+
+            <ul>
+                <li>Premier élément de la liste</li>
+                <li>Deuxième élément avec <strong>texte en gras</strong></li>
+                <li>Troisième élément avec une sous-liste :
+                    <ul>
+                        <li>Sous-élément 1</li>
+                        <li>Sous-élément 2</li>
+                        <li>Sous-élément 3 avec encore une sous-liste :
+                            <ul>
+                                <li>Niveau 3-1</li>
+                                <li>Niveau 3-2</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>Quatrième élément</li>
+            </ul>
+
+            <h3>Listes numérotées</h3>
+
+            <ol>
+                <li>Premier élément numéroté</li>
+                <li>Deuxième élément
+                    <ol>
+                        <li>Sous-élément avec lettres</li>
+                        <li>Autre sous-élément</li>
+                    </ol>
+                </li>
+                <li>Troisième élément</li>
+            </ol>
+
+            <h2>Images avec alignement</h2>
+
+            <div class="wp-block-image alignleft">
+                <img src="https://picsum.photos/400/300?random=1" alt="Image alignée à gauche">
+            </div>
+
+            <p>Ce paragraphe contient une image alignée à gauche. Le texte s'enroule naturellement autour de l'image créant un effet de magazine professionnel. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+            <p>Le texte continue de s'enrouler autour de l'image. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
+
+            <div style="clear: both;"></div>
+
+            <div class="wp-block-image alignright">
+                <img src="https://picsum.photos/400/300?random=2" alt="Image alignée à droite">
+            </div>
+
+            <p>Cette fois, l'image est alignée à droite. Le texte s'enroule du côté gauche. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+
+            <p>Encore un paragraphe qui continue autour de l'image. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+            <div style="clear: both;"></div>
+
+            <div class="wp-block-image aligncenter">
+                <figure>
+                    <img src="https://picsum.photos/800/400?random=3" alt="Image centrée">
+                    <figcaption>Légende de l'image centrée avec un style élégant</figcaption>
+                </figure>
+            </div>
+
+            <h2>Citation</h2>
+
+            <blockquote class="wp-block-quote">
+                <p>Ceci est une citation importante qui mérite d'être mise en évidence. Elle a un style distinct avec une bordure colorée et un fond subtil.</p>
+                <cite>Auteur de la citation</cite>
+            </blockquote>
+
+            <h2>Code</h2>
+
+            <p>Voici du code inline : <code>const greeting = "Hello World";</code> dans le texte.</p>
+
+            <p>Et un bloc de code :</p>
+
+            <pre><code>function calculateSum(a, b) {
+    return a + b;
+}
+
+const result = calculateSum(5, 3);
+console.log(result); // 8</code></pre>
+
+            <h2>Galerie d'images</h2>
+
+            <div class="wp-block-gallery">
+                <img src="https://picsum.photos/300/200?random=4" alt="Image galerie 1">
+                <img src="https://picsum.photos/300/200?random=5" alt="Image galerie 2">
+                <img src="https://picsum.photos/300/200?random=6" alt="Image galerie 3">
+                <img src="https://picsum.photos/300/200?random=7" alt="Image galerie 4">
+                <img src="https://picsum.photos/300/200?random=8" alt="Image galerie 5">
+                <img src="https://picsum.photos/300/200?random=9" alt="Image galerie 6">
+            </div>
+
+            <h2>Tableau</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Valeur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Élément 1</td>
+                        <td>Description de l'élément 1</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>Élément 2</td>
+                        <td>Description de l'élément 2</td>
+                        <td>200</td>
+                    </tr>
+                    <tr>
+                        <td>Élément 3</td>
+                        <td>Description de l'élément 3</td>
+                        <td>300</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Formatage de texte</h2>
+
+            <p>Vous pouvez utiliser <strong>du texte en gras</strong>, <em>du texte en italique</em>, <u>du texte souligné</u>, <s>du texte barré</s>, et du <mark>texte surligné</mark>.</p>
+
+            <hr>
+
+            <h2>Bouton WordPress</h2>
+
+            <div class="wp-block-button">
+                <a href="#" class="wp-block-button__link">Cliquez ici</a>
+            </div>
+
+            <p>Dernier paragraphe pour conclure cette démonstration. Tous les éléments sont stylisés de manière cohérente et professionnelle.</p>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-16 bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-gray-600">
+            <p class="mb-2">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                Tous les styles sont appliqués automatiquement via le composant
+            </p>
+            <p class="text-sm">
+                <i class="fas fa-file-code mr-2"></i>
+                Aucune modification du HTML en base de données requise
+            </p>
+        </div>
+    </footer>
+
+    <!-- Styles du composant (embarqués pour la démo) -->
+    <style>
+/* ======================================== */
+/* STYLES WORDPRESS CONTENT */
+/* ======================================== */
+.wp-content { color: #1f2937; line-height: 1.8; font-size: 1.0625rem; }
+.wp-content p { margin-top: 1.25em; margin-bottom: 1.25em; line-height: 1.8; color: #374151; }
+.wp-content > p:first-of-type { font-size: 1.125rem; line-height: 1.75; color: #1f2937; }
+.wp-content p:empty { margin: 0.5em 0; min-height: 0; }
+.wp-content p:empty + p:empty { display: none; }
+
+.wp-content h1, .wp-content h2, .wp-content h3, .wp-content h4, .wp-content h5, .wp-content h6 { margin-top: 2em; margin-bottom: 0.75em; font-weight: 700; line-height: 1.3; color: #111827; }
+.wp-content h1 { font-size: 2.25rem; }
+.wp-content h2 { font-size: 1.875rem; }
+.wp-content h3 { font-size: 1.5rem; }
+.wp-content h4 { font-size: 1.25rem; }
+.wp-content h5 { font-size: 1.125rem; }
+.wp-content h6 { font-size: 1rem; }
+.wp-content > h1:first-child, .wp-content > h2:first-child, .wp-content > h3:first-child, .wp-content > h4:first-child { margin-top: 0; }
+
+.wp-content ul, .wp-content ol { margin-top: 1.5em; margin-bottom: 1.5em; padding-left: 1.75em; }
+.wp-content ul { list-style-type: disc; }
+.wp-content ol { list-style-type: decimal; }
+.wp-content li { margin-top: 0.5em; margin-bottom: 0.5em; line-height: 1.75; color: #374151; }
+.wp-content ul ul, .wp-content ol ul { list-style-type: circle; margin-top: 0.5em; margin-bottom: 0.5em; }
+.wp-content ul ul ul, .wp-content ol ul ul { list-style-type: square; }
+.wp-content ol ol { list-style-type: lower-alpha; }
+.wp-content ol ol ol { list-style-type: lower-roman; }
+
+.wp-content a { color: #0891b2; text-decoration: underline; text-decoration-color: rgba(8, 145, 178, 0.3); text-underline-offset: 2px; transition: all 0.2s ease; }
+.wp-content a:hover { color: #0e7490; text-decoration-color: rgba(14, 116, 144, 0.6); text-underline-offset: 4px; }
+
+.wp-content img { max-width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+.wp-content .wp-block-image { margin: 2.5em 0; text-align: center; }
+.wp-content .wp-block-image img { margin: 0 auto; }
+.wp-content .wp-block-image.alignleft, .wp-content .alignleft { float: left; margin: 0.5em 2em 1.5em 0; max-width: 50%; }
+.wp-content .wp-block-image.alignright, .wp-content .alignright { float: right; margin: 0.5em 0 1.5em 2em; max-width: 50%; }
+.wp-content .wp-block-image.aligncenter, .wp-content .aligncenter { display: block; margin-left: auto; margin-right: auto; text-align: center; }
+
+.wp-content figure { margin: 2.5em 0; text-align: center; }
+.wp-content figcaption { margin-top: 0.75em; font-size: 0.875rem; color: #6b7280; font-style: italic; text-align: center; padding: 0.5em 1em; background-color: #f9fafb; border-left: 3px solid #0891b2; border-radius: 0.25rem; }
+
+.wp-content .wp-block-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2.5em 0; padding: 0; list-style: none; }
+.wp-content .wp-block-gallery img { width: 100%; height: 250px; object-fit: cover; border-radius: 0.5rem; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.wp-content .wp-block-gallery img:hover { transform: scale(1.02); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+
+.wp-content blockquote { margin: 2em 0; padding: 1.25em 1.5em; border-left: 4px solid #0891b2; background: linear-gradient(to right, #f0fdfa, #ffffff); border-radius: 0.375rem; font-style: italic; color: #374151; position: relative; }
+.wp-content blockquote p { margin-top: 0.5em; margin-bottom: 0.5em; }
+.wp-content blockquote p:first-child::before { content: '"'; font-size: 2em; color: #0891b2; opacity: 0.3; position: absolute; left: 0.5em; top: 0.25em; font-family: Georgia, serif; }
+.wp-content blockquote cite { display: block; margin-top: 1em; font-size: 0.875rem; color: #6b7280; font-style: normal; }
+
+.wp-content code { background-color: #f3f4f6; color: #ef4444; padding: 0.2em 0.4em; border-radius: 0.25rem; font-size: 0.875em; font-family: 'Monaco', 'Courier New', monospace; }
+.wp-content pre { margin: 2em 0; padding: 1.25em; background-color: #1f2937; color: #f9fafb; border-radius: 0.5rem; overflow-x: auto; font-size: 0.875rem; line-height: 1.7; }
+.wp-content pre code { background-color: transparent; color: inherit; padding: 0; font-size: inherit; }
+
+.wp-content table { width: 100%; margin: 2em 0; border-collapse: collapse; font-size: 0.9375rem; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); }
+.wp-content thead { background: linear-gradient(to bottom, #f9fafb, #f3f4f6); }
+.wp-content th { padding: 0.875rem 1rem; text-align: left; font-weight: 600; color: #111827; border-bottom: 2px solid #e5e7eb; }
+.wp-content td { padding: 0.875rem 1rem; color: #374151; border-bottom: 1px solid #e5e7eb; }
+.wp-content tbody tr:hover { background-color: #f9fafb; }
+
+.wp-content hr { margin: 3em auto; border: none; border-top: 2px solid #e5e7eb; max-width: 60%; }
+
+.wp-content strong, .wp-content b { font-weight: 700; color: #111827; }
+.wp-content em, .wp-content i { font-style: italic; color: #4b5563; }
+.wp-content u { text-decoration: underline; text-underline-offset: 2px; }
+.wp-content s, .wp-content del { text-decoration: line-through; color: #9ca3af; }
+.wp-content mark { background-color: #fef3c7; color: #92400e; padding: 0.125em 0.25em; border-radius: 0.125rem; }
+
+.wp-content .wp-block-button { margin: 1.5em 0; }
+.wp-content .wp-block-button__link { display: inline-block; padding: 0.75em 1.5em; background-color: #0891b2; color: white !important; text-decoration: none !important; border-radius: 0.375rem; font-weight: 500; transition: all 0.2s ease; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); }
+.wp-content .wp-block-button__link:hover { background-color: #0e7490; transform: translateY(-1px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+
+.wp-content::after, .wp-content p::after { content: ""; display: table; clear: both; }
+
+@media (max-width: 768px) {
+    .wp-content { font-size: 1rem; }
+    .wp-content h1 { font-size: 1.875rem; }
+    .wp-content h2 { font-size: 1.5rem; }
+    .wp-content h3 { font-size: 1.25rem; }
+    .wp-content .wp-block-image.alignleft, .wp-content .alignleft, .wp-content .wp-block-image.alignright, .wp-content .alignright { float: none; max-width: 100%; margin: 1.5em 0; }
+    .wp-content .wp-block-gallery { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+}
+
+@media (max-width: 480px) {
+    .wp-content { font-size: 0.9375rem; }
+    .wp-content .wp-block-gallery { grid-template-columns: 1fr; }
+}
+    </style>
+</body>
+</html>

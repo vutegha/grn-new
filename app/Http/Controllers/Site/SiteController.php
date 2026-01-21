@@ -1442,5 +1442,24 @@ public function rapportShow($slug)
 
     return view('site.rapport', compact('rapport'));
 }
+
+/**
+ * Afficher le profil d'un auteur
+ */
+public function auteurShow($id)
+{
+    $auteur = Auteur::with(['publications' => function($query) {
+        $query->where('statut', 'publie')
+              ->latest()
+              ->take(10);
+    }])->findOrFail($id);
+
+    // Compter le nombre total de publications de l'auteur
+    $totalPublications = $auteur->publications()
+                                ->where('statut', 'publie')
+                                ->count();
+
+    return view('site.auteur', compact('auteur', 'totalPublications'));
+}
    
 }

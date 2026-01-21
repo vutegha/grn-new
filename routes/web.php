@@ -73,6 +73,9 @@ Route::get('/publications', [SiteController::class, 'publications'])->name('site
 Route::get('/publications/{slug}', [SiteController::class, 'publicationShow'])->name('publication.show');
 Route::get('/convert-image/{publication}', [SiteController::class, 'convertirImageUnique'])->name('publications.convert.single');
 
+// Auteurs
+Route::get('/auteur/{id}', [SiteController::class, 'auteurShow'])->name('site.auteur.show');
+
 // Actualités
 Route::get('/actualites', [SiteController::class, 'actualites'])->name('site.actualites');
 Route::get('/actualite/{slug}', [SiteController::class, 'actualiteShow'])->name('site.actualite.show');

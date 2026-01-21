@@ -201,7 +201,7 @@
                         @if($publication->auteur)
                             <div class="flex items-center">
                                 <i class="fas fa-user mr-2" aria-hidden="true"></i>
-                                <a href="{{ route('site.auteur.show', $publication->auteur->id) }}" 
+                                <a href="{{ route('site.auteur.show', $publication->auteur->getSlug()) }}" 
                                    class="hover:underline hover:text-iri-gold transition-colors">
                                     {{ e($publication->auteur->nom) }}
                                 </a>
@@ -319,7 +319,7 @@
                                 @if($publication->auteur)
                                     <div class="flex items-center text-gray-600">
                                         <i class="fas fa-user mr-3 text-iri-primary w-4" aria-hidden="true"></i>
-                                        <a href="{{ route('site.auteur.show', $publication->auteur->id) }}" 
+                                        <a href="{{ route('site.auteur.show', $publication->auteur->getSlug()) }}" 
                                            class="hover:text-iri-primary hover:underline transition-colors">
                                             {{ e($publication->auteur->nom) }}
                                         </a>

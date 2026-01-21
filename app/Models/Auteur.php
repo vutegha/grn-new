@@ -58,4 +58,37 @@ class Auteur extends Model
     {
         return $this->belongsToMany(Publication::class);
     }
+
+    /**
+     * Génère un slug pour l'auteur avec nom-prenom-id
+     */
+    public function getSlug()
+    {
+        $parts = [];
+        
+        if ($this->nom) {
+            $parts[] = \Illuminate\Support\Str::slug($this->nom);
+        }
+        
+        if ($this->prenom) {
+            $parts[] = \Illuminate\Support\Str::slug($this->prenom);
+        }
+        
+        $parts[] = $this->id;
+        
+        return implode('-', $parts);
+    }
+
+    /**
+     * Extrait l'ID depuis un slug d'auteur
+     */
+    public static function getIdFromSlug($slug)
+    {
+        // L'ID est toujours la dernière partie du slug
+        $parts = explode('-', $slug);
+        $id = end($parts);
+        
+        // Vérifier que c'est bien un nombre
+        return is_numeric($id) ? (int)$id : null;
+    }
 }

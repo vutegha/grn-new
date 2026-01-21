@@ -1446,8 +1446,15 @@ public function rapportShow($slug)
 /**
  * Afficher le profil d'un auteur
  */
-public function auteurShow($id)
+public function auteurShow($slug)
 {
+    // Extraire l'ID depuis le slug
+    $id = Auteur::getIdFromSlug($slug);
+    
+    if (!$id) {
+        abort(404, 'Auteur introuvable');
+    }
+
     $auteur = Auteur::with(['publications' => function($query) {
         $query->where('statut', 'publie')
               ->latest()

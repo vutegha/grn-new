@@ -5,12 +5,12 @@
 @push('meta')
     <meta name="description" content="Profil de {{ $auteur->prenom }} {{ $auteur->nom }}{{ $auteur->institution ? ' - ' . $auteur->institution : '' }}. {{ $auteur->biographie ? Str::limit(strip_tags($auteur->biographie), 160) : 'Découvrez ses publications et contributions.' }}">
     <meta name="keywords" content="{{ $auteur->prenom }} {{ $auteur->nom }}, auteur, chercheur, GRN, UCBC, RDC{{ $auteur->institution ? ', ' . $auteur->institution : '' }}">
-    <link rel="canonical" href="{{ route('site.auteur.show', $auteur->id) }}">
+    <link rel="canonical" href="{{ route('site.auteur.show', $auteur->getSlug()) }}">
     
     <!-- Open Graph -->
     <meta property="og:title" content="{{ $auteur->prenom }} {{ $auteur->nom }} - Profil Auteur">
     <meta property="og:description" content="{{ $auteur->biographie ? Str::limit(strip_tags($auteur->biographie), 160) : 'Profil et publications de ' . $auteur->prenom . ' ' . $auteur->nom }}">
-    <meta property="og:url" content="{{ route('site.auteur.show', $auteur->id) }}">
+    <meta property="og:url" content="{{ route('site.auteur.show', $auteur->getSlug()) }}">
     <meta property="og:type" content="profile">
     @if($auteur->photo)
     <meta property="og:image" content="{{ asset('storage/' . $auteur->photo) }}">

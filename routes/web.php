@@ -74,7 +74,7 @@ Route::get('/publications/{slug}', [SiteController::class, 'publicationShow'])->
 Route::get('/convert-image/{publication}', [SiteController::class, 'convertirImageUnique'])->name('publications.convert.single');
 
 // Auteurs
-Route::get('/auteur/{id}', [SiteController::class, 'auteurShow'])->name('site.auteur.show');
+Route::get('/auteur/{slug}', [SiteController::class, 'auteurShow'])->name('site.auteur.show');
 
 // Actualités
 Route::get('/actualites', [SiteController::class, 'actualites'])->name('site.actualites');
